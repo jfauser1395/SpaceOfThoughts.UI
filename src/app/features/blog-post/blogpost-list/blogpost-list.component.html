@@ -6,5 +6,26 @@
       >Add BlogPost</a
     >
   </div>
+  @if( blogPost$ | async; as blogPosts ){
+  <table class="table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Short Description</th>
+        <th>Is Visible?</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(blogPost of blogPosts; track blogPost){
+      <tr>
+        <td>{{ blogPost.title }}</td>
+        <td>{{ blogPost.shortDescription }}</td>
+        <td>{{ blogPost.isVisible }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  }
 </div>
 >

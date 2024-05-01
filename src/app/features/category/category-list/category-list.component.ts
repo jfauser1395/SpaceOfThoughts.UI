@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../Models/category.model';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.css',
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent {
   categories$?: Observable<Category[]>;
 
   constructor(private categoryService: CategoryService) {}
