@@ -60,6 +60,12 @@
         <label for="featuredImageUrl" class="form-label"
           >Featured Image Url</label
         >
+
+        @if(model.featuredImageUrl != ''){
+          <div>
+            <img [src]="model.featuredImageUrl" height="100" class="my-2">
+          </div>
+        }
         <input
           type="text"
           id="featuredImageUrl"
