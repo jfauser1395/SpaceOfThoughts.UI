@@ -50,7 +50,7 @@
               [(ngModel)]="model.content"
             ></textarea>
           </div>
-          <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll;">
+          <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll">
             <markdown [data]="model.content"></markdown>
           </div>
         </div>
@@ -62,9 +62,9 @@
         >
 
         @if(model.featuredImageUrl != ''){
-          <div>
-            <img [src]="model.featuredImageUrl" height="100" class="my-2">
-          </div>
+        <div>
+          <img [src]="model.featuredImageUrl" height="100" class="my-2" />
+        </div>
         }
         <input
           type="text"
