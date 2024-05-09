@@ -17,6 +17,7 @@ export class BlogpostListComponent {
   constructor(private blogpostService: BlogPostService) {}
 
   ngOnInit(): void {
+    // get all blog posts from the API
     this.blogPost$ = this.blogpostService.getAllBlogPosts();
   }
 }

@@ -13,6 +13,7 @@
         <th>Title</th>
         <th>Short Description</th>
         <th>Is Visible?</th>
+        <th>Categories</th>
       </tr>
     </thead>
     <tbody>
@@ -21,11 +22,14 @@
         <td>{{ blogPost.title }}</td>
         <td>{{ blogPost.shortDescription }}</td>
         <td>{{ blogPost.isVisible }}</td>
+        <td>
+          @for(category of blogPost.categories; track category) {
+          <span class="badge bg-secondary me-2">{{ category.name }}</span>
+          }
+        </td>
       </tr>
       }
     </tbody>
   </table>
-
   }
 </div>
->
