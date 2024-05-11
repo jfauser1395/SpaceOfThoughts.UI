@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { BlogPostService } from '../services/blog-post.service';
 import { Router } from '@angular/router';
-import { MarkdownModule } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '../../category/Models/category.model';
 import { CommonModule } from '@angular/common';
+import { MarkdownComponent} from 'ngx-markdown';
 
 @Component({
   selector: 'app-add-blogpost',
   standalone: true,
-  imports: [FormsModule, DatePipe, MarkdownModule, CommonModule],
+  imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule],
   templateUrl: './add-blogpost.component.html',
   styleUrl: './add-blogpost.component.css',
 })
