@@ -10,12 +10,13 @@ import { Category } from '../../category/Models/category.model';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent} from 'ngx-markdown';
 
+
 @Component({
-  selector: 'app-add-blogpost',
-  standalone: true,
-  imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule],
-  templateUrl: './add-blogpost.component.html',
-  styleUrl: './add-blogpost.component.css',
+    selector: 'app-add-blogpost',
+    standalone: true,
+    templateUrl: './add-blogpost.component.html',
+    styleUrl: './add-blogpost.component.css',
+    imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule]
 })
 export class AddBlogpostComponent implements OnInit {
   model: AddBlogPost;
