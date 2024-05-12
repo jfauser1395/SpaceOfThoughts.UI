@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../Models/category.model';
 import { UpdateCategoryRequest } from '../Models/update-category-request.model';
-import { response } from 'express';
+
 
 @Component({
   selector: 'app-edit-category',
