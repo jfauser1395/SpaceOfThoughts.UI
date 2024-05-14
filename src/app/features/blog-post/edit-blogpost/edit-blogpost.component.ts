@@ -2,16 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { BlogPostService } from '../services/blog-post.service';
-import { BlogPost } from '../Models/blog-post.model';
+import { BlogPost } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AddBlogPost } from '../Models/add-blog-post.model';
+import { AddBlogPost } from '../models/add-blog-post.model';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category.service';
-import { Category } from '../../category/Models/category.model';
-import { UpdateBlogPost } from '../Models/update-blog-post.model';
+import { Category } from '../../category/models/category.model';
+import { UpdateBlogPost } from '../models/update-blog-post.model';
 import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
 
 @Component({

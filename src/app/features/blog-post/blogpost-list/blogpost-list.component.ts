@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BlogPostService } from '../services/blog-post.service';
 import { Observable } from 'rxjs';
-import { BlogPost } from '../Models/blog-post.model';
+import { BlogPost } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
