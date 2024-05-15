@@ -12,32 +12,42 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category.service';
 import { Category } from '../../category/models/category.model';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
-import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
+import { ImageSelectorComponent } from '../../../shared/components/image-selector/image-selector.component';
+import { ImageService } from '../../../shared/components/image-selector/image.service';
 
 @Component({
-    selector: 'app-edit-blogpost',
-    standalone: true,
-    templateUrl: './edit-blogpost.component.html',
-    styleUrl: './edit-blogpost.component.css',
-    imports: [CommonModule, FormsModule, MarkdownComponent, DatePipe, ImageSelectorComponent]
+  selector: 'app-edit-blogpost',
+  standalone: true,
+  templateUrl: './edit-blogpost.component.html',
+  styleUrl: './edit-blogpost.component.css',
+  imports: [
+    CommonModule,
+    FormsModule,
+    MarkdownComponent,
+    DatePipe,
+    ImageSelectorComponent,
+  ],
 })
 export class EditBlogpostComponent implements OnInit, OnDestroy {
   id: string | null = null;
   model?: BlogPost;
   categories$?: Observable<Category[]>;
   selectedCategories?: string[];
-  isImageSelectorVisible: boolean = false;
+  
 
   routeSubscribtion?: Subscription;
   getBlogPostSubscribtion?: Subscription;
   updateBlogPostSubscription?: Subscription;
   deleteBlogPostSubscription?: Subscription;
+  imageSelectSubscription?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private blogPostService: BlogPostService,
     private categoryService: CategoryService,
+    private imageService: ImageService,
     private router: Router
+    
   ) {}
 
   ngOnInit(): void {
@@ -48,14 +58,24 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         this.id = params.get('id');
 
         // Get BlogPost from API
-        this.getBlogPostSubscribtion = this.blogPostService
-          .getBlogPostById(this.id)
-          .subscribe({
-            next: (response) => {
-              this.model = response;
-              this.selectedCategories = response.categories.map((x) => x.id);
-            },
-          });
+        if (this.id) {
+          this.getBlogPostSubscribtion = this.blogPostService
+            .getBlogPostById(this.id)
+            .subscribe({
+              next: (response) => {
+                this.model = response;
+                this.selectedCategories = response.categories.map((x) => x.id);
+              },
+            });
+        }
+
+        this.imageSelectSubscription = this.imageService.onSelectImage().subscribe({
+          next: (response) => {
+            if (this.model) {
+              this.model.featuredImageUrl = response.url;
+            }
+          },
+        });
       },
     });
   }
@@ -103,5 +123,6 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     this.getBlogPostSubscribtion?.unsubscribe();
     this.updateBlogPostSubscription?.unsubscribe();
     this.deleteBlogPostSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
   }
 }

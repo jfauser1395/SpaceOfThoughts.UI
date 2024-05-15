@@ -1,1 +1,141 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* Custom scrollbar */
+
+html {
+    background: linear-gradient(left, #99a, #eee, #99a);
+  }
+  
+  .page {
+    margin: 0 auto 0 -40px;
+    text-align: center;
+    padding: 1em 0;
+  }
+  
+  .scroll {
+    overflow-y: scroll;
+    display: inline-block;
+  }
+  .scroll .inner {
+    height: 300%;
+    width: 100%;
+    
+    object-fit: contain;
+  }
+  .scroll--simple::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scroll--simple::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .scroll--simple::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .scroll--simple::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .scroll--simple::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  .scroll--grey::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll--grey::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .scroll--grey::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #999, #888);
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.8);
+  }
+  .scroll--grey::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(left, #888, #777);
+  }
+  .scroll--white::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll--white::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+  }
+  .scroll--white::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #fff, #e4e4e4);
+    border: 1px solid #aaa;
+  }
+  .scroll--white::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+  }
+  .scroll--white::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22add4, #1e98ba);
+  }
+  .scroll--square::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scroll--square::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+  .scroll--square::-webkit-scrollbar-thumb {
+    background: linear-gradient(left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.15));
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .scroll--square::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+  }
+  .scroll--black::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scroll--black::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #444;
+    box-shadow: 0 0 1px 1px #111, inset 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+  .scroll--black::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #3e3e3e, #111, #000);
+    box-shadow: inset 0 0 1px 1px #646464;
+  }
+  .scroll--itunes::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scroll--itunes::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #eee;
+    box-shadow: 0 0 1px 1px #bbb, inset 0 0 7px rgba(0, 0, 0, 0.3);
+  }
+  .scroll--itunes::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #96a6bf, #63738c);
+    box-shadow: inset 0 0 1px 1px #5c6670;
+  }
+  .scroll--itunes::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(left, #8391a6, #536175);
+  }
+  .scroll--sublime::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scroll--sublime::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: linear-gradient(left, #212121, #323232);
+    box-shadow: 0 0 1px 1px #111;
+  }
+  .scroll--sublime::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #4a4a4a, #404040);
+    box-shadow: inset 0 0 1px 1px #191919;
+  }
+  .scroll--sublime::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(left, #555555, #4e4e4e);
+  }

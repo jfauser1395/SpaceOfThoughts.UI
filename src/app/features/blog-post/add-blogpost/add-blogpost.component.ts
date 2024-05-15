@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AddBlogPost } from '../models/add-blog-post.model';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { BlogPostService } from '../services/blog-post.service';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscribable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent} from 'ngx-markdown';
+import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
+import { ImageService } from '../../../shared/components/image-selector/image.service';
 
 
 @Component({
@@ -16,15 +18,18 @@ import { MarkdownComponent} from 'ngx-markdown';
     standalone: true,
     templateUrl: './add-blogpost.component.html',
     styleUrl: './add-blogpost.component.css',
-    imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule]
+    imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule, ImageSelectorComponent]
 })
-export class AddBlogpostComponent implements OnInit {
+export class AddBlogpostComponent implements OnInit, OnDestroy {
   model: AddBlogPost;
   categories$?: Observable<Category[]>;
+
+  imageSelectorSubscription?: Subscription;
 
   constructor(
     private blogpostService: BlogPostService,
     private categoryService: CategoryService,
+    private imageService: ImageService,
     private router: Router
   ) {
     this.model = {
@@ -39,9 +44,14 @@ export class AddBlogpostComponent implements OnInit {
       categories: [],
     };
   }
-
+ 
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
+
+    this.imageSelectorSubscription = this.imageService.onSelectImage().subscribe({
+      next: (selectedImage) =>
+        this.model.featuredImageUrl = selectedImage.url
+    })
   }
 
   onFormSubmit(): void {
@@ -52,4 +62,9 @@ export class AddBlogpostComponent implements OnInit {
       },
     });
   }
+
+  ngOnDestroy(): void {
+    this.imageSelectorSubscription?.unsubscribe();
+  }
+
 }

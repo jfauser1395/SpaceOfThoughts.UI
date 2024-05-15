@@ -46,12 +46,12 @@
             <textarea
               id="content"
               name="content"
-              class="form-control"
+              class="form-control scroll scroll--simple"
               style="height: 350px; max-height: 350px"
               [(ngModel)]="model.content"
             ></textarea>
           </div>
-          <div class="col-6 p-2" style="max-height: 350px; overflow-y: scroll">
+          <div class="col-6 p-2 scroll scroll--simple" style="max-height: 350px; overflow-y: scroll">
             <markdown [data]="model.content"></markdown>
           </div>
         </div>
