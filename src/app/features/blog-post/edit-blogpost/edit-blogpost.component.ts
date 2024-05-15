@@ -33,7 +33,6 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   model?: BlogPost;
   categories$?: Observable<Category[]>;
   selectedCategories?: string[];
-  
 
   routeSubscribtion?: Subscription;
   getBlogPostSubscribtion?: Subscription;
@@ -47,7 +46,6 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private imageService: ImageService,
     private router: Router
-    
   ) {}
 
   ngOnInit(): void {
@@ -69,13 +67,15 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
             });
         }
 
-        this.imageSelectSubscription = this.imageService.onSelectImage().subscribe({
-          next: (response) => {
-            if (this.model) {
-              this.model.featuredImageUrl = response.url;
-            }
-          },
-        });
+        this.imageSelectSubscription = this.imageService
+          .onSelectImage()
+          .subscribe({
+            next: (response) => {
+              if (this.model) {
+                this.model.featuredImageUrl = response.url;
+              }
+            },
+          });
       },
     });
   }

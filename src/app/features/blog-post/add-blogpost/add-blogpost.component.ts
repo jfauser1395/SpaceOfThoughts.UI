@@ -8,17 +8,22 @@ import { CategoryService } from '../../category/services/category.service';
 import { Observable, Subscribable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { CommonModule } from '@angular/common';
-import { MarkdownComponent} from 'ngx-markdown';
-import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
+import { MarkdownComponent } from 'ngx-markdown';
+import { ImageSelectorComponent } from '../../../shared/components/image-selector/image-selector.component';
 import { ImageService } from '../../../shared/components/image-selector/image.service';
 
-
 @Component({
-    selector: 'app-add-blogpost',
-    standalone: true,
-    templateUrl: './add-blogpost.component.html',
-    styleUrl: './add-blogpost.component.css',
-    imports: [FormsModule, DatePipe, MarkdownComponent, CommonModule, ImageSelectorComponent]
+  selector: 'app-add-blogpost',
+  standalone: true,
+  templateUrl: './add-blogpost.component.html',
+  styleUrl: './add-blogpost.component.css',
+  imports: [
+    FormsModule,
+    DatePipe,
+    MarkdownComponent,
+    CommonModule,
+    ImageSelectorComponent,
+  ],
 })
 export class AddBlogpostComponent implements OnInit, OnDestroy {
   model: AddBlogPost;
@@ -44,14 +49,16 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
       categories: [],
     };
   }
- 
+
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
 
-    this.imageSelectorSubscription = this.imageService.onSelectImage().subscribe({
-      next: (selectedImage) =>
-        this.model.featuredImageUrl = selectedImage.url
-    })
+    this.imageSelectorSubscription = this.imageService
+      .onSelectImage()
+      .subscribe({
+        next: (selectedImage) =>
+          (this.model.featuredImageUrl = selectedImage.url),
+      });
   }
 
   onFormSubmit(): void {
@@ -66,5 +73,4 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.imageSelectorSubscription?.unsubscribe();
   }
-
 }
