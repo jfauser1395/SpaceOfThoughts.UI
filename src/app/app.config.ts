@@ -1,11 +1,16 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { importProvidersFrom } from '@angular/core';
 import { provideMarkdown } from 'ngx-markdown';
-
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     importProvidersFrom(HttpClientModule),
     provideMarkdown(),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    CookieService,
   ],
 };
