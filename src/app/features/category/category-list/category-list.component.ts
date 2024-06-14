@@ -17,7 +17,7 @@ export class CategoryListComponent {
   totalCount?: number;
   list: number[] = [];
   pageNumber = 1;
-  pageSize = 4;
+  pageSize = 9;
 
   constructor(private categoryService: CategoryService) {}
 
