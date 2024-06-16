@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^18.0.3",
     "@angular/platform-server": "^18.0.3",
     "@angular/router": "^18.0.3",
+    "@angular/service-worker": "^18.0.3",
     "@angular/ssr": "^18.0.4",
     "jwt-decode": "^4.0.0",
     "marked": "^12.0.2",

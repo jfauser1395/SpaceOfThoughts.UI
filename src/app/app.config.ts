@@ -3,10 +3,11 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { provideMarkdown } from 'ngx-markdown';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,9 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(),
     provideMarkdown(),
     provideHttpClient(withInterceptors([authInterceptor])),
-    CookieService,
+    CookieService, provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 };
