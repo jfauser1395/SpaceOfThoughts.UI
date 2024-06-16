@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(),
     provideMarkdown(),
     provideHttpClient(withInterceptors([authInterceptor])),
     CookieService,
