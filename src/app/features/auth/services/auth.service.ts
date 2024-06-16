@@ -28,8 +28,8 @@ export class AuthService {
   setUser(user: User): void {
     this.$user.next(user);
 
-    localStorage.setItem('user-email', user.email);
-    localStorage.setItem('user-roles', user.roles.join(','));
+    sessionStorage.setItem('user-email', user.email);
+    sessionStorage.setItem('user-roles', user.roles.join(','));
   }
 
   user(): Observable<User | undefined> {
@@ -37,8 +37,8 @@ export class AuthService {
   }
 
   getUser(): User | undefined {
-    const email = localStorage.getItem('user-email');
-    const roles = localStorage.getItem('user-roles');
+    const email = sessionStorage.getItem('user-email');
+    const roles = sessionStorage.getItem('user-roles');
 
     if (email && roles) {
       const user: User = {
@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear();
+    sessionStorage.clear();
     this.cookieService.delete('Authorization', '/');
     this.$user.next(undefined);
   }
