@@ -1,3 +1,8 @@
+/*fonts*/
+@font-face{
+  font-family: NavFont;
+  src:url('../public/fonts/Magiesta.ttf');
+}
 
 /* Custom scrollbar */
 

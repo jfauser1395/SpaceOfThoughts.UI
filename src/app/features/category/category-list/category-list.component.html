@@ -5,13 +5,13 @@
       <input type="text" class="form-control" #queryText />
       <button
         type="button"
-        class="btn btn-warning ms-3"
+        class="btn btn-info ms-3"
         (click)="onSearch(queryText.value)"
       >
         Search
       </button>
     </div>
-    <a class="btn btn-primary ms-2" [routerLink]="['/admin/categories/add']"
+    <a class="btn btn-success ms-2" [routerLink]="['/admin/categories/add']"
       >Add Category</a
     >
   </div>
@@ -30,7 +30,7 @@
               <span>
                 <button
                   type="button"
-                  class="btn btn-light ms-2"
+                  class="btn btn-secondary ms-2"
                   (click)="sort('name', 'asc')"
                 >
                   <i class="bi bi-arrow-up"></i>
@@ -39,7 +39,7 @@
               <span>
                 <button
                   type="button"
-                  class="btn btn-light ms-2"
+                  class="btn btn-secondary ms-2"
                   (click)="sort('name', 'desc')"
                 >
                   <i class="bi bi-arrow-down"></i>
@@ -69,7 +69,7 @@
         <td>
           <span class="d-flex justify-content-center align-items-center"
             ><a
-              class="btn btn-light"
+              class="btn btn-secondary"
               [routerLink]="['/admin/categories', category.id]"
               >Edit</a
             >
