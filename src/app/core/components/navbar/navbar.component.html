@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand navbarHeader align-items-center" href="#">Space of Thoughts</a>
+    <a class="navbar-brand blogFontThemeNav align-items-center" href="#">Space of Thoughts</a>
     <button
       class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around"
       type="button"
@@ -10,9 +10,11 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
+    <div class="mb-3 me-3">
       <span class="toggler-icon top-bar"></span>
       <span class="toggler-icon middle-bar"></span>
       <span class="toggler-icon bottom-bar"></span>
+    </div>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -48,8 +50,8 @@
       </ul>
       <div class="d-flex">
         @if(user === undefined){
-        <a [routerLink]="['/login']" class="btn btn-dark">Login</a>
-        <a [routerLink]="['/login']" class="btn btn-outline-light ms-1">Sign Up</a>
+        <a [routerLink]="['/login']" class="btn btn-dark btnCustomLogIn">Login</a>
+        <a [routerLink]="['/login']" class="btn btn-dark btnPrimary ms-1">Sign Up</a>
         }@else {
         <div class="d-flex align-items-center">
           <span class="font-monospace form-control-lg">{{ user.email }}</span>

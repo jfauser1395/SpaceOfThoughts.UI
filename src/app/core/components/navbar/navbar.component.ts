@@ -18,8 +18,6 @@ export class NavbarComponent implements OnInit {
     
   }
 
-  
-
   ngOnInit(): void { 
     this.authService.user().subscribe({
       next: (response) => {

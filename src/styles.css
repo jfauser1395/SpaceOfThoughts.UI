@@ -1,8 +1,39 @@
+/*Buttons*/
+
+/*primary*/
+.btnPrimary {
+  background-color: #A66776; 
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  background-color: #d47e92;
+}
+
+/*Secondary*/
+.btnCustomLogIn {
+  color: #A66776;
+  background-color: #212529
+}
+/*########################################################################*/
 /*fonts*/
 @font-face{
   font-family: NavFont;
   src:url('../public/fonts/Magiesta.ttf');
 }
+
+/* Theme font*/
+.blogFontThemeNav{
+  font-family: NavFont;
+  color: #A66776; 
+  font-size: 30px;
+}
+
+.blogFontTheme{
+  font-family: NavFont; 
+  font-size: 20px;
+}
+/*########################################################################*/
 
 /* Custom scrollbar */
 
