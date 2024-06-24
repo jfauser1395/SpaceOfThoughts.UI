@@ -1,3 +1,15 @@
+/*Button styling*/
+.btnSearchLense{
+    color: #A66776;
+    
+
+}
+
+.btnSearchLense:hover {
+    color: #d5dfe9;
+}
+
+
 /* Toggle Navbar icon styling*/
 
 .navbar-toggler {
@@ -64,7 +76,7 @@
 /* when navigation is clicked */
 
 .navbar-toggler .top-bar {
-    top: inherit;
+    top: 9px;
     transform: rotate(135deg);
 }
 
@@ -75,7 +87,7 @@
 }
 
 .navbar-toggler .bottom-bar {
-    top: inherit;
+    top: 9px;
     transform: rotate(-135deg);
 }
 

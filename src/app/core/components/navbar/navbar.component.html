@@ -1,6 +1,35 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
   <div class="container">
-    <a class="navbar-brand blogFontThemeNav align-items-center" href="#">Space of Thoughts</a>
+    <a class="navbar-brand blogFontThemeNav align-items-center" href="#"
+      >Space of Thoughts</a
+    >
+
+
+    <div class="mt-1 ms-5"> 
+      <button
+        class="btn btn-link btnSearchLense input-group-text"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#basic-addon1"
+        aria-expanded="false"
+        
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-search mb-1"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+          />
+        </svg>
+      </button>
+    </div>
+
+
     <button
       class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around"
       type="button"
@@ -10,11 +39,11 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-    <div class="mb-3 me-3">
-      <span class="toggler-icon top-bar"></span>
-      <span class="toggler-icon middle-bar"></span>
-      <span class="toggler-icon bottom-bar"></span>
-    </div>
+      <div class="mb-3">
+        <span class="toggler-icon top-bar"></span>
+        <span class="toggler-icon middle-bar"></span>
+        <span class="toggler-icon bottom-bar"></span>
+      </div>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -48,10 +77,15 @@
         </li>
         }
       </ul>
+      
       <div class="d-flex">
         @if(user === undefined){
-        <a [routerLink]="['/login']" class="btn btn-dark btnCustomLogIn">Login</a>
-        <a [routerLink]="['/login']" class="btn btn-dark btnPrimary ms-1">Sign Up</a>
+        <a [routerLink]="['/login']" class="btn btn-dark btnCustomLogIn"
+          >Login</a
+        >
+        <a [routerLink]="['/login']" class="btn btn-dark btnPrimary ms-1"
+          >Sign Up</a
+        >
         }@else {
         <div class="d-flex align-items-center">
           <span class="font-monospace form-control-lg">{{ user.email }}</span>
@@ -61,6 +95,7 @@
         </div>
         }
       </div>
+
     </div>
   </div>
 </nav>
