@@ -1,15 +1,3 @@
-/*Button styling*/
-.btnSearchLense{
-    color: #A66776;
-    
-
-}
-
-.btnSearchLense:hover {
-    color: #d5dfe9;
-}
-
-
 /* Toggle Navbar icon styling*/
 
 .navbar-toggler {
