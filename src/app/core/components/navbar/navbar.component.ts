@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { User } from '../../../features/auth/models/user.model';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -12,25 +13,41 @@ import { User } from '../../../features/auth/models/user.model';
 })
 export class NavbarComponent implements OnInit {
   user?: User;
-  userName?: string;
+  userName: string = '';
+  isSmallScreen = false;
 
-  constructor(private authService: AuthService, private router: Router) {
-    
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) {}
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
-       // this.userName = response?.email.split('@')[0];
+        console.log(this.user);
+        if (this.user) {
+          this.userName = this.user.email.split('@')[0];
+        }
       },
     });
 
     this.user = this.authService.getUser();
+
+    this.checkScreenSize();
   }
 
   onLogout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  checkScreenSize() {
+    console.log('hi');
+    const width = window.innerWidth;
+    console.log(width);
+    this.isSmallScreen = width < 576;
+    console.log(this.isSmallScreen);
   }
 }

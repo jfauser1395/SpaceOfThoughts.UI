@@ -3,25 +3,65 @@
   <!-- Container div holds all elements of the navbar -->
   <div class="container">
     <!-- Brand name of the website -->
-    <a
-      class="navbar-brand blogFontThemeNav align-items-center"
-      href="#"
+    <a class="navbar-brand blogFontThemeNav align-items-start" href="#"
       >Space of Thoughts</a
     >
-
-    <!-- Button triggers the search bar -->
-    <div class="mt-1 ms-5">
-      <button
-        class="btn btn-link btnIcons input-group-text"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#basic-addon1"
-        aria-expanded="false"
+    @if(isSmallScreen){
+    <button
+      class="btn btn-link btnIcons input-group-text justify-content-end align-items-end d-sm-flex"
+      type="button"
+      data-bs-toggle="expand"
+      data-bs-target="#search-blog"
+      aria-expanded="true"
+    >
+      <!-- SVG is the search icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        class="bi bi-search mb-1"
+        viewBox="0 0 16 16"
       >
-        <!-- the search icon -->
-        <i class="bi bi-search mb-1"></i>
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+        />
+      </svg>
+    </button>
+    } @else {
+
+    <div class="input-group w-100">
+      <input
+        type="text"
+        class="form-control border-0"
+        id="search-blog"
+        placeholder="Search the Blog"
+        aria-label="Search the Blog"
+        aria-describedby="search-blog"
+      />
+      <button
+        class="btn btn-dark btnIcons input-group-text"
+        type="button"
+        data-bs-toggle="expand"
+        data-bs-target="#search-blog"
+        aria-expanded="true"
+      >
+        <!-- SVG is the search icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-search mb-1"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+          />
+        </svg>
       </button>
     </div>
+    }
 
     <!-- Button toggles the navbar on smaller screens -->
     <button
@@ -44,13 +84,13 @@
     <!-- Div contains the actual navigation links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Ul contains the list of navigation links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <!-- Each li is a single navigation link -->
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Categories</a>
+          <a class="nav-link active" aria-current="page" href="#">Blogs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">About</a>

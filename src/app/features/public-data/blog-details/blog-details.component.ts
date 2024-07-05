@@ -19,6 +19,9 @@ export class BlogDetailsComponent implements OnInit {
   blogPost$?: Observable<BlogPost>;
   constructor(private route: ActivatedRoute, private blogPostService: BlogPostService) {}
   ngOnInit(): void {
+
+    window.scrollTo(0, 0);
+
     this.route.paramMap.subscribe({
       next: (params) => {
         this.url = params.get('url');
