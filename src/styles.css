@@ -13,9 +13,18 @@
   }
 }
 
+/* Loading animation */
+
 .loadAnimation {
   animation: pulse 2s infinite;
 }
+
+@media (min-width: 768px) {
+  .loadAnimation {
+    margin-top: 150px;
+  }
+}
+
 
 /* Icons*/
 .btnIcons{
@@ -58,6 +67,13 @@
   color: #A66776; 
   font-size: 30px;
 }
+
+@media(max-width: 375px) {
+  .blogFontThemeNav {
+    font-size: 28px;
+  }
+}
+
 
 .blogFontThemeNav:hover {
   color: #d5dfe9;

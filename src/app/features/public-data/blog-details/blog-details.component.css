@@ -1,15 +1,5 @@
-@keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  svg {
-    animation: pulse 2s infinite;
+  .full-width {
+    width: 100vw; 
+    height: auto; 
+    object-fit: cover; 
   }

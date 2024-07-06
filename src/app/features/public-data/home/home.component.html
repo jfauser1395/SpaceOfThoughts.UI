@@ -1,4 +1,4 @@
-<div class="constant">
+<div class="constant container-wrapper">
   <div class="my-3 p-4">
     <div class="row align-items-start">
       @if(blogs$ | async; as blogs) { @for(blog of blogs; track blog) {
@@ -67,7 +67,7 @@
       } } @else {
       <div
         class="d-flex justify-content-center align-items-lg-center ms-4"
-        style="height: 50vh"
+        style="height: 45vh"
       >
         <img
           class="loadAnimation"

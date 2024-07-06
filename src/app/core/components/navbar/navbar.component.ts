@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
     this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
-        console.log(this.user);
         if (this.user) {
           this.userName = this.user.email.split('@')[0];
         }
@@ -34,7 +33,6 @@ export class NavbarComponent implements OnInit {
     });
 
     this.user = this.authService.getUser();
-
     this.checkScreenSize();
   }
 
@@ -44,10 +42,7 @@ export class NavbarComponent implements OnInit {
   }
 
   checkScreenSize() {
-    console.log('hi');
     const width = window.innerWidth;
-    console.log(width);
     this.isSmallScreen = width < 576;
-    console.log(this.isSmallScreen);
   }
 }

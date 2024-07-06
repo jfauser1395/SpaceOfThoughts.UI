@@ -20,7 +20,11 @@ export class BlogDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private blogPostService: BlogPostService) {}
   ngOnInit(): void {
 
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
     this.route.paramMap.subscribe({
       next: (params) => {
