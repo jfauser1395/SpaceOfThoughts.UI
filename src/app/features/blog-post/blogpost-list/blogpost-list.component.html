@@ -22,7 +22,7 @@
       <tr>
         <td>{{ blogPost.title }}</td>
         <td class="text-center">{{ blogPost.author }}</td>
-        <td>{{ blogPost.publishedDate }}</td>
+        <td class="text-center">{{ blogPost.publishedDate  | date : "yyyy-MM-dd" }}</td>
         <td class="text-center">{{ blogPost.isVisible }}</td>
         <td class="text-center">
           @for(category of blogPost.categories; track category) {

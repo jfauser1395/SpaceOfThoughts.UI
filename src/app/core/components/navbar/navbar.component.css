@@ -1,28 +1,32 @@
 /* search icon styling */
 
 
+/*styling for smaller screens*/
+
 .searchIconSmallScreen {
   position: relative;
-  left: 8px;
 }
-/* For screens smaller than 600px wide */
-@media (max-width: 600px) {
-  .searchIconSmallScreen {
-    left: 60px;
-  }
-}
-
-/* For screens smaller than 460px wide */
-@media (max-width: 460px) {
-  .searchIconSmallScreen {
-    left: 40px;
-  }
-}
-
-/* For screens smaller than 414px wide */
-@media (max-width: 414px) {
+/* For screens bigger than 460px wide */
+@media (min-width: 360px) {
   .searchIconSmallScreen {
     left: 25px;
+  }
+}
+
+.searchIconLargerScreens {
+  position: relative;
+}
+
+@media (min-width: 428px) {
+  .searchIconLargerScreens {
+    left: 50px;
+  }
+}
+
+/* search input field */
+@media (max-width: 992px) {
+  .input-group {
+    max-width: 50%; /* Adjust this value as needed */
   }
 }
 

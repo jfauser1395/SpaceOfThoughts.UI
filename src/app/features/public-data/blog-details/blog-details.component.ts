@@ -18,6 +18,7 @@ export class BlogDetailsComponent implements OnInit {
   url: string | null = null;
   blogPost$?: Observable<BlogPost>;
   constructor(private route: ActivatedRoute, private blogPostService: BlogPostService) {}
+  
   ngOnInit(): void {
 
     window.scrollTo({

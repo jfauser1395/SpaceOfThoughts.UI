@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   userName: string = '';
   isSmallScreen = false;
 
+
   constructor(
     private authService: AuthService,
     private router: Router,

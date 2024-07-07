@@ -8,7 +8,7 @@
     >
     @if(isSmallScreen){
     <button
-      class="btn btn-link btnIcons input-group-text justify-content-end align-items-end d-sm-flex searchIconSmallScreen"
+      class="btn btn-link btnIcons input-group-text justify-content-end align-items-end d-sm-flex searchIconSmallScreen searchIconLargerScreens"
       type="button"
       data-bs-toggle="expand"
       data-bs-target="#search-blog"
@@ -29,7 +29,6 @@
       </svg>
     </button>
     } @else {
-    <div class="col-xs-6 col-sm-7 col-lg-8">
       <div class="input-group">
         <input
           type="text"
@@ -61,7 +60,7 @@
           </svg>
         </button>
       </div>
-    </div>
+
     }
 
     <!-- Button toggles the navbar on smaller screens -->
@@ -74,7 +73,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <div class="mb-3">
+      <div class="mb-4">
         <!-- Spans are the lines in the hamburger icon -->
         <span class="toggler-icon top-bar"></span>
         <span class="toggler-icon middle-bar"></span>
