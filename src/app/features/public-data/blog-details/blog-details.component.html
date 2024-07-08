@@ -1,7 +1,7 @@
 @if(blogPost$ | async; as blogPost) {
 <div class="container">
   <div class="py-5">
-    <div class="col-12 col-md-8 col-lg-12 mx-auto">
+    <div class="col-12 col-md-12 col-lg-12 mx-auto">
       <h1 class="mb-4 text-center">{{ blogPost.title }}</h1>
 
       <img
@@ -24,7 +24,7 @@
         </div>
       </div>
       }
-      <div class="mt-4 blog-content">
+      <div class="mt-4 blog-content p-3">
         <markdown [data]="blogPost.content"></markdown>
         <h6 class="mt-1 text-end blogFontTheme">Article published by: {{ blogPost.author }}</h6>
       </div>
@@ -33,7 +33,7 @@
 </div>
 
 }@else{
-<div class="position-absolute top-50 start-50 translate-middle ms-4 mt-3">
+<div class="d-flex justify-content-center align-items-lg-center ms-4 mt-5">
   <img
     class="loadAnimation"
     src="assets/loadIcon.svg"

@@ -8,12 +8,17 @@ import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-b
 import { HomeComponent } from './features/public-data/home/home.component';
 import { BlogDetailsComponent } from './features/public-data/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
 import { authGuard } from './features/auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'create-account',
+    component: CreateAccountComponent,
   },
   {
     path: 'login',

@@ -29,37 +29,37 @@
       </svg>
     </button>
     } @else {
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control border-0"
-          id="search-blog"
-          placeholder="Search the Blog"
-          aria-label="Search the Blog"
-          aria-describedby="search-blog"
-        />
-        <button
-          class="btn btn-dark btnIcons input-group-text"
-          type="button"
-          data-bs-toggle="expand"
-          data-bs-target="#search-blog"
-          aria-expanded="true"
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control border-0"
+        id="search-blog"
+        placeholder="Search the Blog"
+        aria-label="Search the Blog"
+        aria-describedby="search-blog"
+      />
+      <button
+        class="btn btn-dark btnIcons input-group-text"
+        type="button"
+        data-bs-toggle="expand"
+        data-bs-target="#search-blog"
+        aria-expanded="true"
+      >
+        <!-- SVG is the search icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-search mb-1"
+          viewBox="0 0 16 16"
         >
-          <!-- SVG is the search icon -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-search mb-1"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-            />
-          </svg>
-        </button>
-      </div>
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+          />
+        </svg>
+      </button>
+    </div>
 
     }
 
@@ -106,7 +106,11 @@
             aria-expanded="false"
             >Admin</a
           >
-          <ul class="dropdown-menu">
+          <ul
+            class="dropdown-menu"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
             <li>
               <a class="dropdown-item" [routerLink]="['/admin/categories']"
                 >Categories</a
@@ -126,7 +130,12 @@
       <!--  login/logout functionality -->
       <div class="d-flex">
         @if(user === undefined) {
-        <a [routerLink]="['/login']" class="btn btn-link btnIcons mt-1">
+        <a
+          [routerLink]="['/login']"
+          class="btn btn-link btnIcons mt-1 me-2"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
           <!-- SVG is the user icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
