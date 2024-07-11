@@ -6,6 +6,7 @@ import { BlogPost } from '../../blog-post/models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
+import { StyleService } from '../../../../services/style.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -17,14 +18,17 @@ import { MarkdownComponent } from 'ngx-markdown';
 export class BlogDetailsComponent implements OnInit {
   url: string | null = null;
   blogPost$?: Observable<BlogPost>;
-  constructor(private route: ActivatedRoute, private blogPostService: BlogPostService) {}
-  
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private blogPostService: BlogPostService,
+    private loadingIconService: StyleService
+  ) {}
 
+  ngOnInit(): void {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.route.paramMap.subscribe({
@@ -34,11 +38,15 @@ export class BlogDetailsComponent implements OnInit {
     });
 
     // Fetch blog details by url
-    if(this.url) {
+    if (this.url) {
       this.blogPost$ = this.blogPostService.getBlogPostByUrlHandle(this.url);
     }
   }
 
-  
-  
+  loadImageOn() {
+    this.loadingIconService.setBodyStyle('overflow', 'hidden');
+  }
+  loadImageOff() {
+    this.loadingIconService.setBodyStyle('overflow', 'auto');
+  }
 }
