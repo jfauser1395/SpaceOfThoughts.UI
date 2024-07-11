@@ -9,6 +9,7 @@
             [alt]="blog.title"
             class="card-img-top img-fluid"
             style="height: 450px"
+            (load) = "loadImageOff()"  
           />
           <div class="d-flex justify-content-between mt-1">
             <div class="d-flex">
@@ -46,15 +47,14 @@
       </div>
       } } @else {
       <div
-        class="d-flex justify-content-center align-items-lg-center ms-4 mt-5"
-        style="height: 45vh"
+        class="loadAnimation ms-5"
       >
         <img
-          class="loadAnimation"
           src="assets/loadIcon.svg"
           alt="loading data..."
           height="450"
           width="450"
+          (load) = "loadImageOn()"   
         />
       </div>
       }
