@@ -18,6 +18,8 @@ import { StyleService } from '../../../../services/style.service';
 export class BlogDetailsComponent implements OnInit {
   url: string | null = null;
   blogPost$?: Observable<BlogPost>;
+  isUp = false;
+
   constructor(
     private route: ActivatedRoute,
     private blogPostService: BlogPostService,
@@ -25,11 +27,14 @@ export class BlogDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    if (this.isUp == false) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+      this.isUp = true;
+    }
 
     this.route.paramMap.subscribe({
       next: (params) => {
@@ -44,7 +49,9 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   loadImageOn() {
-    this.loadingIconService.setBodyStyle('overflow', 'hidden');
+    if (this.isUp) {
+      this.loadingIconService.setBodyStyle('overflow', 'hidden');
+    }
   }
   loadImageOff() {
     this.loadingIconService.setBodyStyle('overflow', 'auto');
