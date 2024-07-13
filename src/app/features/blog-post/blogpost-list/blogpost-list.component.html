@@ -6,10 +6,9 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Author</th>
         <th>Date</th>
-        <th>Is Visible?</th>
-        <th>Categories</th>
+        <th>Published</th>
+        <th class="text-center">Categories</th>
         <th>
           <span class="d-flex justify-content-center align-items-center mb-1">
             <i class="bi bi-tools"></i>
@@ -19,10 +18,9 @@
     </thead>
     <tbody>
       @for(blogPost of blogPosts; track blogPost){
-      <tr>
-        <td>{{ blogPost.title }}</td>
-        <td class="text-center">{{ blogPost.author }}</td>
-        <td class="text-center">{{ blogPost.publishedDate  | date : "yyyy-MM-dd" }}</td>
+      <tr class="align-middle">
+        <td style="font-size: small;">{{ blogPost.title }}</td>
+        <td class="text-center">{{ blogPost.publishedDate  | date : "yy-MM-dd" }}</td>
         <td class="text-center">{{ blogPost.isVisible }}</td>
         <td class="text-center">
           @for(category of blogPost.categories; track category) {
@@ -46,7 +44,7 @@
    <div class="d-flex justify-content-between">
     <div class="flex-column align-item-start">
       <button
-        class="btn btn-primary"
+        class="btn btn-primary me-1"
         [routerLink]="['/admin/blogposts/add']"
       >
         Add BlogPost

@@ -8,7 +8,6 @@
         [src]="blogPost.featuredImageUrl"
         [title]="blogPost.title"
         class="img-fluid full-width mt-2"
-        (load) = "loadImageOff()"
       />
 
       @if(blogPost.categories){
@@ -41,8 +40,7 @@
     src="assets/loadIcon.svg"
     alt="loading data..."
     height="450"
-    width="450"
-    (load) = "loadImageOn()"   
+    width="450" 
   />
 </div>
 }

@@ -27,14 +27,11 @@ export class BlogDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.isUp == false) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-      this.isUp = true;
-    }
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
 
     this.route.paramMap.subscribe({
       next: (params) => {
@@ -46,14 +43,5 @@ export class BlogDetailsComponent implements OnInit {
     if (this.url) {
       this.blogPost$ = this.blogPostService.getBlogPostByUrlHandle(this.url);
     }
-  }
-
-  loadImageOn() {
-    if (this.isUp) {
-      this.loadingIconService.setBodyStyle('overflow', 'hidden');
-    }
-  }
-  loadImageOff() {
-    this.loadingIconService.setBodyStyle('overflow', 'auto');
   }
 }
