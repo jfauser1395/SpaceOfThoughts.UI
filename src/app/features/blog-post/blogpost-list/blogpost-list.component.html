@@ -1,16 +1,16 @@
 <div class="container">
-  <h1 class="mt-4 mb-5">Blog Post List</h1>
+  <h1 class="mt-4 mb-5 ms-1">Blog Post List</h1>
 
   @if( blogPost$ | async; as blogPosts ){
   <table class="table table-bordered mt-3">
     <thead>
-      <tr>
-        <th>Title</th>
+      <tr class="align-middle text-center">
+        <th class="text-start">Title</th>
         <th>Date</th>
-        <th>Published</th>
-        <th class="text-center">Categories</th>
+        <th>Online</th>
+        <th>Category</th>
         <th>
-          <span class="d-flex justify-content-center align-items-center mb-1">
+          <span class="d-flex justify-content-center">
             <i class="bi bi-tools"></i>
           </span>
         </th>
@@ -19,8 +19,10 @@
     <tbody>
       @for(blogPost of blogPosts; track blogPost){
       <tr class="align-middle">
-        <td style="font-size: small;">{{ blogPost.title }}</td>
-        <td class="text-center">{{ blogPost.publishedDate  | date : "yy-MM-dd" }}</td>
+        <td style="font-size: small">{{ blogPost.title }}</td>
+        <td class="text-center">
+          {{ blogPost.publishedDate | date : "MM-dd-yy" }}
+        </td>
         <td class="text-center">{{ blogPost.isVisible }}</td>
         <td class="text-center">
           @for(category of blogPost.categories; track category) {
@@ -41,7 +43,7 @@
     </tbody>
   </table>
   }
-   <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between">
     <div class="flex-column align-item-start">
       <button
         class="btn btn-primary me-1"
