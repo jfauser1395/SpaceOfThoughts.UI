@@ -1,7 +1,7 @@
 /* search icon styling */
 .searchIconAnimation {
   position: absolute;
-  transition: width 1s, transform 1s;
+  transition: width 0.5s, transform 0.5s;
   width: 33px;
   height: 33px;
   background: black;
@@ -35,7 +35,7 @@
   color: #a66776;
   text-align: center;
   font-size: 1.2em;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .searchIconAnimation.expanded {
@@ -72,12 +72,38 @@
   }
 }
 
+/* For screens bigger than 375px wide */
+@media (min-width: 375px) {
+  .searchIconSmallScreen {
+    top: 3.1vh;
+    left: 74%;
+  }
+}
+
+/* For screens bigger than 390px wide */
+@media (min-width: 390px) {
+  .searchIconSmallScreen {
+    top: 3.1vh;
+    left: 74%;
+  }
+}
+
+
+/* For screens bigger than 414px wide */
+@media (min-width: 414px) {
+  .searchIconSmallScreen {
+    top: 3vh;
+    left: 74%;
+  }
+}
+
 .searchIconLargerScreens {
   position: absolute;
 }
 
 @media (min-width: 428px) {
   .searchIconLargerScreens {
+    top: 3vh;
     left: 76%;
   }
 }
