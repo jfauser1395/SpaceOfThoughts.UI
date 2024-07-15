@@ -59,7 +59,7 @@
 /* For screens bigger than 320px wide */
 @media (min-width: 320px) {
   .searchIconSmallScreen {
-    top: 4.5vh;
+    top: 3vh;
     left: 72.5%;
   }
 }
