@@ -7,27 +7,34 @@
       >Space of Thoughts</a
     >
     @if(isSmallScreen){
-    <button
-      class="btn btn-link btnIcons input-group-text justify-content-end align-items-end d-sm-flex searchIconSmallScreen searchIconLargerScreens"
-      type="button"
-      data-bs-toggle="expand"
-      data-bs-target="#search-blog"
-      aria-expanded="true"
+    <div
+      class="searchIconAnimation searchIconSmallScreen searchIconLargerScreens" [class.expanded]="searchExpanded"
+      
     >
-      <!-- SVG is the search icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="currentColor"
-        class="bi bi-search mb-1 mt-2"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-        />
-      </svg>
-    </button>
+      <input
+      #searchInput
+      (keyup.enter)="collapseSearch()"
+        type="search"
+        class="searchIconAnimationInput"
+        placeholder="Search blog ..."
+      />
+      <a class="fa"
+      (click)="toggleSearchBar()"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+          />
+        </svg>
+      </a>
+    </div>
+
     } @else {
     <div class="input-group">
       <input
@@ -38,13 +45,7 @@
         aria-label="Search the Blog"
         aria-describedby="search-blog"
       />
-      <button
-        class="btn btn-dark btnIcons input-group-text"
-        type="button"
-        data-bs-toggle="expand"
-        data-bs-target="#search-blog"
-        aria-expanded="true"
-      >
+      <button class="btn btn-dark btnIcons input-group-text me-2" type="button">
         <!-- SVG is the search icon -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -81,6 +82,7 @@
       </div>
     </button>
 
+    @if(isMediumScreen) {
     <!-- Div contains the actual navigation links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Ul contains the list of navigation links -->
@@ -157,6 +159,86 @@
           <!-- Span displays the user's email -->
           <span class="font-monospace form-control-lg">{{ user.email }}</span>
           <!-- Button logs the user out -->
+          <button
+            class="btn btnPrimary ms-3"
+            (click)="onLogout()"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+          >
+            Logout
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+    } @else {
+    <!-- Div contains the actual navigation links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Ul contains the list of navigation links -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- Each li is a single navigation link -->
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">About</a>
+        </li>
+
+        <!-- Part is only visible to users with the 'Writer' role -->
+        @if(user !== undefined && user.roles.includes('Writer')) {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >Admin</a
+          >
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/admin/categories']"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+              <a class="dropdown-item" [routerLink]="['/admin/blogposts']"
+                >BlogPosts</a
+              >
+            </li>
+          </ul>
+        </li>
+        }
+      </ul>
+
+      <!--  login/logout functionality -->
+      <div class="d-flex">
+        @if(user === undefined) {
+        <a [routerLink]="['/login']" class="btn btn-link btnIcons mt-1 me-2">
+          <!-- SVG is the user icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="currentColor"
+            class="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+            />
+          </svg>
+        </a>
+        } @else {
+        <div class="d-flex align-items-center">
+          <!-- Span displays the user's email -->
+          <span class="font-monospace form-control-lg">{{ user.email }}</span>
+          <!-- Button logs the user out -->
           <button class="btn btnPrimary ms-3" (click)="onLogout()">
             Logout
           </button>
@@ -164,5 +246,6 @@
         }
       </div>
     </div>
+    }
   </div>
 </nav>

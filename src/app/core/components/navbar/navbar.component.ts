@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { User } from '../../../features/auth/models/user.model';
 import { ViewportScroller } from '@angular/common';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,10 @@ export class NavbarComponent implements OnInit {
   user?: User;
   userName: string = '';
   isSmallScreen = false;
+  isMediumScreen = false;
+  searchExpanded = false;
 
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -45,5 +49,18 @@ export class NavbarComponent implements OnInit {
   checkScreenSize() {
     const width = window.innerWidth;
     this.isSmallScreen = width < 576;
+    this.isMediumScreen = width < 992;
+  }
+  toggleSearchBar() {
+    if (this.searchExpanded == false) {
+      this.searchExpanded = true;
+    } else {
+      this.searchExpanded = false;
+    }
+  }
+
+  collapseSearch() {
+    this.searchExpanded = false;
+    this.searchInput.nativeElement.value = '';
   }
 }

@@ -1,25 +1,84 @@
 /* search icon styling */
+.searchIconAnimation {
+  position: absolute;
+  transition: width 1s, transform 1s;
+  width: 33px;
+  height: 33px;
+  background: black;
+  box-sizing: border-box;
+  border-radius: 25px;
+  padding: 5px;
+  z-index: 1;
+}
+
+.searchIconAnimationInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 33px;
+  line-height: 30px;
+  background: white;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+  color: black;
+}
+
+.fa {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  color: #a66776;
+  text-align: center;
+  font-size: 1.2em;
+  transition: all 1s;
+}
+
+.searchIconAnimation.expanded {
+  width: 84%;
+  cursor: pointer;
+  transform: translateX(-85%);
+}
+
+.searchIconAnimation.expanded .searchIconAnimationInput {
+  display: block;
+}
 
 
 /*styling for smaller screens*/
 
 .searchIconSmallScreen {
-  position: relative;
+  position: absolute;
 }
-/* For screens bigger than 460px wide */
+
+
+/* For screens bigger than 320px wide */
+@media (min-width: 320px) {
+  .searchIconSmallScreen {
+    top: 4.5vh;
+    left: 72.5%;
+  }
+}
+
+/* For screens bigger than 360px wide */
 @media (min-width: 360px) {
   .searchIconSmallScreen {
-    left: 25px;
+    top: 3vh;
+    left: 74%;
   }
 }
 
 .searchIconLargerScreens {
-  position: relative;
+  position: absolute;
 }
 
 @media (min-width: 428px) {
   .searchIconLargerScreens {
-    left: 50px;
+    left: 76%;
   }
 }
 
@@ -29,6 +88,7 @@
     max-width: 50%; /* Adjust this value as needed */
   }
 }
+
 
 /* Toggle Navbar icon styling*/
 
@@ -59,7 +119,7 @@
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #ffffff;
+  background: white;
   border-radius: 1px;
   opacity: 1;
   left: 0;
@@ -113,5 +173,5 @@
 /* Color of 3 lines */
 
 .navbar-toggler.collapsed .toggler-icon {
-  background: linear-gradient(263deg, #a66776 0%, #ffffff 100%);
+  background: linear-gradient(263deg, #a66776 0%,  white 100%);
 }
