@@ -4,7 +4,7 @@
   transition: width 0.7s, transform 0.7s;
   width: 33px;
   height: 33px;
-  background: black;
+  background: #a66776;;
   box-sizing: border-box;
   border-radius: 25px;
   padding: 5px;
@@ -33,14 +33,14 @@
   position: absolute;
   top: 5px;
   right: 6px;
-  color: #a66776;
+  color: white;
   text-align: center;
   font-size: 1.2em;
   transition: all 0.7s;
 }
 
 .searchIconAnimation.expanded {
-  width: 97%;
+  width: 94%;
   cursor: pointer;
   transform: translateX(-75%);
 }
