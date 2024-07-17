@@ -2,6 +2,7 @@
   <div class="my-3 p-4">
     <div class="row align-items-start justify-content-center">
       @if(blogs$ | async; as blogs) { @for(blog of blogs; track blog) {
+      @if(blog.isVisible){
       <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-3 mb-2 d-flex p-2">
         <div class="card d-flex">
           <img
@@ -46,7 +47,7 @@
         </div>
       </div>
 
-      } } @else {
+      }} } @else {
       <div class="loadAnimation ms-5">
         <img
           src="assets/loadIcon.svg"
