@@ -8,18 +8,17 @@
     >
     @if(isSmallScreen){
     <div
-      class="searchIconAnimation searchIconSmallScreen searchIconLargerScreens" [class.expanded]="searchExpanded"
-      
+      class="searchIconAnimation searchIconSmallScreen searchIconLargerScreens"
+      [class.expanded]="searchExpanded"
     >
       <input
-      #searchInput
-      (keyup.enter)="collapseSearch()"
+        #searchInput
+        (keyup.enter)="collapseSearch()"
         type="search"
         class="searchIconAnimationInput"
         placeholder="Search blog ..."
       />
-      <a class="fa"
-      (click)="toggleSearchBar()"
+      <a class="fa" (click)="toggleSearchBar()"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -106,7 +105,7 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            >Admin</a
+            >Admin-Tools</a
           >
           <ul
             class="dropdown-menu"
@@ -155,10 +154,12 @@
           </svg>
         </a>
         } @else {
-        <div class="d-flex align-items-center">
-          <!-- Span displays the user's email -->
-          <span class="font-monospace form-control-lg">{{ user.email }}</span>
-          <!-- Button logs the user out -->
+        <div class="d-flex align-items-center justify-content-end">
+          <!--  displays the user's email -->
+          <div class="blogFontTheme d-flex">
+            Hay <span class="ms-1 me-1"> {{ user.userName }} </span> !
+          </div>
+          <!--  logs the user out -->
           <button
             class="btn btnPrimary ms-3"
             (click)="onLogout()"
@@ -195,7 +196,7 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            >Admin</a
+            >Admin-Tools</a
           >
           <ul class="dropdown-menu">
             <li>
@@ -236,9 +237,11 @@
         </a>
         } @else {
         <div class="d-flex align-items-center">
-          <!-- Span displays the user's email -->
-          <span class="font-monospace form-control-lg">{{ user.email }}</span>
-          <!-- Button logs the user out -->
+          <!--  displays the user's email -->
+          <div class="blogFontTheme d-flex ms-2">
+            Hay <span class="ms-1 me-1"> {{ user.userName }} </span> !
+          </div>
+          <!--  logs the user out -->
           <button class="btn btnPrimary ms-3" (click)="onLogout()">
             Logout
           </button>

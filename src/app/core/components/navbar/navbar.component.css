@@ -2,9 +2,9 @@
 .searchIconAnimation {
   position: absolute;
   transition: width 0.7s, transform 0.7s;
-  width: 33px;
-  height: 33px;
-  background: #a66776;;
+  width: 35px;
+  height: 35px;
+  background: #212529;;
   box-sizing: border-box;
   border-radius: 25px;
   padding: 5px;
@@ -16,7 +16,7 @@
   top: 0;
   left: 0;
   width: 80%;
-  height: 33px;
+  height: 35px;
   line-height: 30px;
   background: white;
   outline: 0;
@@ -31,9 +31,9 @@
 
 .fa {
   position: absolute;
-  top: 5px;
-  right: 6px;
-  color: white;
+  top: 6px;
+  right: 8px;
+  color: #a66776;
   text-align: center;
   font-size: 1.2em;
   transition: all 0.7s;

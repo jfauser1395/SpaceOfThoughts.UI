@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,7 @@ export class AuthService {
   $user = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
+
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
@@ -27,7 +29,7 @@ export class AuthService {
 
   setUser(user: User): void {
     this.$user.next(user);
-
+    sessionStorage.setItem('user-name', user.userName);
     sessionStorage.setItem('user-email', user.email);
     sessionStorage.setItem('user-roles', user.roles.join(','));
   }
@@ -37,11 +39,13 @@ export class AuthService {
   }
 
   getUser(): User | undefined {
+    const userName = sessionStorage.getItem('user-name');
     const email = sessionStorage.getItem('user-email');
     const roles = sessionStorage.getItem('user-roles');
 
-    if (email && roles) {
+    if (email && roles && userName) {
       const user: User = {
+        userName: userName,
         email: email,
         roles: roles.split(','),
       };

@@ -53,12 +53,15 @@ export class LoginComponent implements OnInit {
 
         // Set User
         this.authService.setUser({
+          userName: response.userName,
           email: response.email,
           roles: response.roles,
         });
 
         // Redirect back to Home
         this.router.navigateByUrl('/');
+
+        console.log(response);
       },
     });
   }
