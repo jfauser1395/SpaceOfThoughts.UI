@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     };
   }
   ngOnInit(): void {
-    
     window.scrollTo({
       top: 0,
       left: 0,
@@ -60,8 +59,6 @@ export class LoginComponent implements OnInit {
 
         // Redirect back to Home
         this.router.navigateByUrl('/');
-
-        console.log(response);
       },
     });
   }

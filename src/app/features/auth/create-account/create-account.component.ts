@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginRequest } from '../models/login-request.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { StyleService } from '../../../../services/style.service';
+import { RegisterRequest } from '../models/register-request.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-account',
@@ -14,15 +14,19 @@ import { StyleService } from '../../../../services/style.service';
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.css',
 })
-export class CreateAccountComponent implements OnInit {
-  model: LoginRequest;
+export class CreateAccountComponent implements OnInit, OnDestroy {
+  private addUser?: Subscription;
+  model: RegisterRequest;
+  password: string = '';
+  passwordRepeat: string = '';
+
   constructor(
     private authService: AuthService,
-    private cookieService: CookieService,
     private router: Router,
     private styleService: StyleService
   ) {
     this.model = {
+      userName: '',
       email: '',
       password: '',
     };
@@ -37,5 +41,21 @@ export class CreateAccountComponent implements OnInit {
     this.styleService.setBodyStyle('overflow', 'hidden');
   }
 
-  onFormSubmit() {}
+  onFormSubmit() {
+    if (this.password === this.passwordRepeat) {
+      this.model.password = this.password;
+    }
+    if (this.model.password === this.passwordRepeat) {
+      this.addUser = this.authService.register(this.model).subscribe({
+        next: (response) => {
+          this.router.navigateByUrl('/');
+        },
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.addUser?.unsubscribe();
+  }
+
 }
