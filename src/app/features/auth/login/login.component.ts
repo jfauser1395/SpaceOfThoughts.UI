@@ -16,6 +16,10 @@ import { StyleService } from '../../../../services/style.service';
 })
 export class LoginComponent implements OnInit {
   model: LoginRequest;
+  errorTitle: string = '';
+  requestOk: boolean = true;
+  passwordFieldType: string = 'password';
+
   constructor(
     private authService: AuthService,
     private cookieService: CookieService,
@@ -60,6 +64,18 @@ export class LoginComponent implements OnInit {
         // Redirect back to Home
         this.router.navigateByUrl('/');
       },
+      error: (error) => {
+        console.log(error);
+        this.requestOk = error.ok;
+        this.errorTitle = error.error.errors[''];
+      },
     });
   }
+
+
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+
 }

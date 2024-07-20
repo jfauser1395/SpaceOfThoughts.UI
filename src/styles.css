@@ -33,7 +33,7 @@
 
 /* Icons*/
 .btnIcons {
-  color: #a66776;
+  color: #d47e92;
 }
 
 .btnIcons:hover {
@@ -45,19 +45,22 @@
   color: #d5dfe9;
 }
 
+
 /*primary*/
 .btnPrimary {
-  background-color: #a66776;
-  color: #fff;
+  background-color: #d47e92;
+  color: black;
+  
 }
 
 .btnPrimary:hover {
-  background-color: #d47e92;
+  background-color: #a66776;
+  color: white;
 }
 
 /*Secondary*/
 .btnCustomLogIn {
-  color: #a66776;
+  color:#d47e92;
   background-color: #212529;
 }
 /*########################################################################*/
@@ -70,7 +73,7 @@
 /* Theme font*/
 .blogFontThemeNav {
   font-family: NavFont;
-  color: #a66776;
+  color: #d47e92;
   font-size: 30px;
 }
 

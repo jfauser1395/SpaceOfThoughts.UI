@@ -19,6 +19,10 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   model: RegisterRequest;
   password: string = '';
   passwordRepeat: string = '';
+  errorTitle: string[] = [];
+  requestOk: boolean = true;
+  passwordFieldType: string = 'password';
+  passwordFieldTypeRepeat: string = 'password';
 
   constructor(
     private authService: AuthService,
@@ -50,6 +54,10 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.router.navigateByUrl('/');
         },
+        error: (error) => {
+          this.requestOk = error.ok;
+          this.errorTitle = error.error.errors[""];
+        },
       });
     }
   }
@@ -57,5 +65,15 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.addUser?.unsubscribe();
   }
+
+
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+  togglePasswordVisibilityRepeat() {
+    this.passwordFieldTypeRepeat = this.passwordFieldTypeRepeat === 'password' ? 'text' : 'password';
+  }
+
 
 }
