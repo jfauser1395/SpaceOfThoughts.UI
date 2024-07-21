@@ -59,6 +59,13 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
           this.errorTitle = error.error.errors[""];
         },
       });
+    } else {
+      this.addUser = this.authService.register(this.model).subscribe({
+        error: (error) => {
+          this.requestOk = error.ok;
+          this.errorTitle = error.error.errors[""];
+        },
+      });
     }
   }
 

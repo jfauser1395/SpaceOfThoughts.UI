@@ -37,6 +37,7 @@ export class AuthService {
 
   setUser(user: User): void {
     this.$user.next(user);
+    sessionStorage.setItem('user-id', user.id);
     sessionStorage.setItem('user-name', user.userName);
     sessionStorage.setItem('user-email', user.email);
     sessionStorage.setItem('user-roles', user.roles.join(','));
@@ -47,12 +48,14 @@ export class AuthService {
   }
 
   getUser(): User | undefined {
+    const id = sessionStorage.getItem('user-id');
     const userName = sessionStorage.getItem('user-name');
     const email = sessionStorage.getItem('user-email');
     const roles = sessionStorage.getItem('user-roles');
 
-    if (email && roles && userName) {
+    if (email && roles && userName && id) {
       const user: User = {
+        id: id,
         userName: userName,
         email: email,
         roles: roles.split(','),
@@ -62,6 +65,14 @@ export class AuthService {
     }
 
     return undefined;
+  }
+
+  getAllUsersFromDatabase(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/api/auth/users`)
+  }
+
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiBaseUrl}/api/auth/users/${id}`)
   }
 
   logout(): void {

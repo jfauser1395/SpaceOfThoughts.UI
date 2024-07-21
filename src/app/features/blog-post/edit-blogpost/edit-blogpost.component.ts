@@ -5,7 +5,6 @@ import { BlogPostService } from '../services/blog-post.service';
 import { BlogPost } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AddBlogPost } from '../models/add-blog-post.model';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';

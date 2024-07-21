@@ -10,6 +10,7 @@ import { BlogDetailsComponent } from './features/public-data/blog-details/blog-d
 import { LoginComponent } from './features/auth/login/login.component';
 import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
 import { authGuard } from './features/auth/guards/auth.guard';
+import { UserListComponent } from './features/auth/user-list/user-list.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,11 @@ export const routes: Routes = [
   {
     path: 'admin/blogposts/:id',
     component: EditBlogpostComponent,
+    canActivate: [authGuard],
+  },
+  { 
+    path: 'admin/users',
+    component: UserListComponent,
     canActivate: [authGuard],
   },
 ];
