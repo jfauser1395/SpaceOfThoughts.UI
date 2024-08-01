@@ -33,6 +33,7 @@
     </thead>
     <tbody>
       @for (user of users; track user) {
+        @if(user.email !== adminEmail) {
       <tr>
         <td>{{ user.userName }}</td>
         <td>
@@ -97,7 +98,7 @@
           </span>
         </td>
       </tr>
-      }
+      }}
     </tbody>
   </table>
   }

@@ -38,7 +38,7 @@
               class="form-control border-end-0"
               id="password"
               name="password"
-              [(ngModel)]="password"
+              [(ngModel)]="passwordFirst"
             />
             <button
               type="button"
@@ -55,6 +55,11 @@
               ></i>
             </button>
           </div>
+          @if(!passwordIsEqual) {
+            <div class="text-danger justify-content-start mt-2">
+              {{ this.passwordErrorMassage }}
+            </div>
+          }
         </div>
 
         <div class="mt-3">
@@ -82,9 +87,14 @@
               ></i>
             </button>
           </div>
+          @if(!passwordIsEqual) {
+            <div class="text-danger justify-content-start mt-2">
+              {{ this.passwordErrorMassage }}
+            </div>
+          }
         </div>
 
-        @if(!requestOk){
+       
         <div class="mt-5">
           @for(error of errorTitle; track error){
 
@@ -93,7 +103,6 @@
           </div>
           }
         </div>
-        }
 
         <div class="mt-3">
           <button type="submit" class="btn btnPrimary form-control mt-4">

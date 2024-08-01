@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   users$?: Observable<User[]>;
   id: string | null = null;
   deleteUserSubscription?: Subscription;
+  adminEmail: string = 'admin@artblog.com';
 
   constructor(private authService: AuthService, private router: Router) {}
 

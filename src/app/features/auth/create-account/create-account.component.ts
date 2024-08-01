@@ -15,10 +15,12 @@ import { Subscription } from 'rxjs';
   styleUrl: './create-account.component.css',
 })
 export class CreateAccountComponent implements OnInit, OnDestroy {
-  private addUser?: Subscription;
+  private addedUser?: Subscription;
   model: RegisterRequest;
-  password: string = '';
+  passwordFirst: string = '';
   passwordRepeat: string = '';
+  passwordIsEqual: boolean = false;
+  passwordErrorMassage: string = '';
   errorTitle: string[] = [];
   requestOk: boolean = true;
   passwordFieldType: string = 'password';
@@ -45,42 +47,46 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     this.styleService.setBodyStyle('overflow', 'hidden');
   }
 
-  onFormSubmit() {
-    if (this.password === this.passwordRepeat) {
-      this.model.password = this.password;
+  passwordIdentical() {
+    if (this.passwordFirst === this.passwordRepeat) {
+      this.model.password = this.passwordFirst;
     }
-    if (this.model.password === this.passwordRepeat) {
-      this.addUser = this.authService.register(this.model).subscribe({
+  }
+
+  onFormSubmit() {
+    //check for equality of the entered passwords
+    this.passwordIdentical();
+
+    if (
+      this.model.password === this.passwordFirst &&
+      this.model.password === this.passwordRepeat
+    ) {
+      this.passwordIsEqual = true;
+      this.addedUser = this.authService.register(this.model).subscribe({
         next: (response) => {
           this.router.navigateByUrl('/');
         },
         error: (error) => {
           this.requestOk = error.ok;
-          this.errorTitle = error.error.errors[""];
+          this.errorTitle = error.error.errors[''];
         },
       });
     } else {
-      this.addUser = this.authService.register(this.model).subscribe({
-        error: (error) => {
-          this.requestOk = error.ok;
-          this.errorTitle = error.error.errors[""];
-        },
-      });
+      this.passwordErrorMassage = '- Entered passwords do not match';
     }
   }
 
   ngOnDestroy(): void {
-    this.addUser?.unsubscribe();
+    this.addedUser?.unsubscribe();
   }
 
-
   togglePasswordVisibility() {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
   togglePasswordVisibilityRepeat() {
-    this.passwordFieldTypeRepeat = this.passwordFieldTypeRepeat === 'password' ? 'text' : 'password';
+    this.passwordFieldTypeRepeat =
+      this.passwordFieldTypeRepeat === 'password' ? 'text' : 'password';
   }
-
-
 }
