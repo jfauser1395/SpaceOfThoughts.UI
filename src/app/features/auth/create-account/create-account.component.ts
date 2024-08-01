@@ -72,6 +72,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
         },
       });
     } else {
+      this.passwordIsEqual = false;
       this.passwordErrorMassage = '- Entered passwords do not match';
     }
   }
