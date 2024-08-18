@@ -4,3 +4,7 @@
     align-items: center;
     height: 90vh;
 }
+
+input.ng-invalid.ng-touched{
+    border: red 2px solid;
+}

@@ -65,7 +65,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (category of categories; track category) {
+      @for (category of categories; track category.id) {
       <tr>
         <!-- <td>{{ category.id }}</td> -->
         <td>{{ category.name }}</td>
@@ -96,7 +96,7 @@
           <li class="page-item">
             <a class="page-link" (click)="getPrevPage()">Previous</a>
           </li>
-          @for (item of list; track item; let idx = $index) {
+          @for (item of list; track $index; let idx = $index) {
           <li class="page-item">
             <a class="page-link" (click)="getPage(idx + 1)">{{ idx + 1 }}</a>
           </li>

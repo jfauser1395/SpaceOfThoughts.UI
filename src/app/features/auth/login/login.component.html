@@ -15,6 +15,7 @@
             class="form-control"
             id="email"
             name="email"
+            autocomplete="email"
             [(ngModel)]="model.email"
           />
         </div>
@@ -27,6 +28,7 @@
               class="form-control border-end-0"
               id="password"
               name="password"
+              autocomplete="current-password"
               [(ngModel)]="model.password"
             />
             <button
@@ -50,9 +52,9 @@
         <div class="mt-5">
           @for(error of errorTitle; track error){
 
-          <div class="text-danger justify-content-start mt-2">
-            - {{ error }}
-          </div>
+          <small class="text-danger justify-content-start mt-2">
+            *{{ error }}
+          </small>
           }
         </div>
         }

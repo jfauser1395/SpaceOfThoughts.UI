@@ -7,16 +7,26 @@
           <span class="blogFontTheme fs-1">spaceofthoughs</span> Account
         </h1>
       </div>
-      <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+      <form [formGroup]="signUpForm" (ngSubmit)="onFormSubmit()">
         <div class="mt-3">
           <label for="email" class="form-label">User Name</label>
           <input
             type="text"
             class="form-control"
-            id="email"
-            name="email"
-            [(ngModel)]="model.userName"
+            id="username"
+            name="username"
+            autocomplete="username"
+            formControlName="userName"
           />
+          @if(signUpForm.get('userName')?.invalid && signUpForm.get('userName')?.touched && !errorTitleUserName){
+            <small class="text-danger justify-content-start mt-2">
+              *This field is required
+            </small>
+          }@else if (!requestOk && errorTitleUserName) {
+            <small class="text-danger justify-content-start mt-2">
+             *{{ this.errorTitleUserName }}
+            </small>
+          }
         </div>
 
         <div class="mt-3">
@@ -26,19 +36,30 @@
             class="form-control"
             id="email"
             name="email"
-            [(ngModel)]="model.email"
+            autocomplete="email"
+            formControlName="email"
           />
+          @if(signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched && !errorTitleEmail){
+            <small class="text-danger justify-content-start mt-2">
+             *This field is required
+            </small>
+          }@else if (!requestOk && errorTitleEmail) {
+            <small class="text-danger justify-content-start mt-2">
+             *{{ this.errorTitleEmail }}
+            </small>
+          }
         </div>
 
         <div class="mt-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="password1" class="form-label">Password</label>
           <div class="input-group">
             <input
               [type]="passwordFieldType"
               class="form-control border-end-0"
-              id="password"
-              name="password"
-              [(ngModel)]="passwordFirst"
+              id="password1"
+              name="password1"
+              autocomplete="new-password"
+              formControlName="password1"
             />
             <button
               type="button"
@@ -55,22 +76,27 @@
               ></i>
             </button>
           </div>
-          @if(!passwordIsEqual) {
-            <div class="text-danger justify-content-start mt-2">
-              {{ this.passwordErrorMassage }}
-            </div>
+          @if(signUpForm.get('password1')?.invalid && signUpForm.get('password1')?.touched && !errorTitle){
+            <small class="text-danger justify-content-start mt-2">
+              *This field is required
+            </small>
+          }@else if(!passwordIsEqual) {
+          <small class="text-danger justify-content-start mt-2">
+            {{ this.passwordErrorMassage }}
+          </small>
           }
         </div>
 
         <div class="mt-3">
-          <label for="password" class="form-label">Repeat password</label>
+          <label for="password2" class="form-label">Repeat password</label>
           <div class="input-group">
             <input
               [type]="passwordFieldTypeRepeat"
               class="form-control border-end-0"
-              id="password"
-              name="password"
-              [(ngModel)]="passwordRepeat"
+              id="password2"
+              name="password2"
+              autocomplete="new-password"
+              formControlName="password2"
             />
             <button
               type="button"
@@ -87,20 +113,24 @@
               ></i>
             </button>
           </div>
-          @if(!passwordIsEqual) {
-            <div class="text-danger justify-content-start mt-2">
-              {{ this.passwordErrorMassage }}
-            </div>
+          @if(signUpForm.get('password2')?.invalid && signUpForm.get('password2')?.touched && !errorTitle){
+            <small class="text-danger justify-content-start mt-2">
+              *This field is required
+            </small>
+          }@else if(!passwordIsEqual) {
+          <small class="text-danger justify-content-start mt-2">
+            {{ this.passwordErrorMassage }}
+          </small>
           }
         </div>
 
-       
-        <div class="mt-5">
+        <div class="mt-1">
           @for(error of errorTitle; track error){
 
-          <div class="text-danger justify-content-start mt-2">
-            - {{ error }}
-          </div>
+          <small class="text-danger justify-content-start mt-2">
+            *{{ error }}
+          </small>
+          <br>
           }
         </div>
 

@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
   onFormSubmit() {
     this.authService.login(this.model).subscribe({
       next: (response) => {
-
-        console.log(response);
         // Set Auth Cookie
         this.cookieService.set(
           'Authorization',
@@ -54,7 +52,6 @@ export class LoginComponent implements OnInit {
           undefined,
           true,
           'Strict'
-          
         );
 
         // Set User
@@ -76,10 +73,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   togglePasswordVisibility() {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    this.passwordFieldType =
+      this.passwordFieldType === 'password' ? 'text' : 'password';
   }
-
-
 }
