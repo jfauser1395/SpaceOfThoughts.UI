@@ -110,9 +110,14 @@
 }
 
 /* search input field */
+.custom-input {
+  align-items: stretch;
+  width: 100%;
+}
+
 @media (max-width: 992px) {
-  .input-group {
-    max-width: 50%; /* Adjust this value as needed */
+  .custom-input {
+    max-width: 50%; 
   }
 }
 

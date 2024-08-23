@@ -1,11 +1,12 @@
 <div class="container">
   <div class="logInScreen">
     <div class="col-12 col-md-8 col-xl-6 mx-auto">
+      <div class="p-4 card rounded-4 bg-light-subtle">
       <h1>Login</h1>
       <form
         class="needs-validation"
         novalidate
-        #form="ngForm"
+        [formGroup]="loginFormGroup"
         (ngSubmit)="onFormSubmit()"
       >
         <div class="mt-3">
@@ -16,25 +17,38 @@
             id="email"
             name="email"
             autocomplete="email"
-            [(ngModel)]="model.email"
+            formControlName="email"
           />
+          <div>
+            @if(loginFormGroup.get('email')?.invalid &&
+            loginFormGroup.get('email')?.touched && errorTitle.length === 0)
+            {
+            <small class="text-danger justify-content-start mt-2">
+              *This field is required
+            </small>
+            } @else if(!requestOk && errorTitle){ @for(error of errorTitle;
+            track error){
+            <small class="text-danger justify-content-start mt-2">
+              *{{ error }}
+            </small>
+            } }
+          </div>
         </div>
 
         <div class="mt-3">
           <label for="password" class="form-label">Password</label>
-          <div class="input-group">
+          <div class="custom-input-group">
             <input
               [type]="passwordFieldType"
-              class="form-control border-end-0"
+              class="form-control"
               id="password"
               name="password"
               autocomplete="current-password"
-              [(ngModel)]="model.password"
+              formControlName="password"
             />
             <button
               type="button"
-              class="input-group-text"
-              style="background-color: #212529"
+              class="inside-btn"
               (click)="togglePasswordVisibility()"
             >
               <i
@@ -46,19 +60,21 @@
               ></i>
             </button>
           </div>
+          <div>
+            @if(loginFormGroup.get('password')?.invalid &&
+            loginFormGroup.get('password')?.touched && errorTitle.length === 0)
+            {
+            <small class="text-danger justify-content-start mt-2">
+              *This field is required
+            </small>
+            } @else if(!requestOk && errorTitle){ @for(error of errorTitle;
+            track error){
+            <small class="text-danger justify-content-start mt-2">
+              *{{ error }}
+            </small>
+            } }
+          </div>
         </div>
-
-        @if(!requestOk){
-        <div class="mt-5">
-          @for(error of errorTitle; track error){
-
-          <small class="text-danger justify-content-start mt-2">
-            *{{ error }}
-          </small>
-          }
-        </div>
-        }
-
         <div class="mt-3">
           <button type="submit" class="btn btnPrimary form-control mt-4">
             Login
@@ -74,6 +90,7 @@
           >
         </div>
       </form>
+      </div>
     </div>
   </div>
 </div>

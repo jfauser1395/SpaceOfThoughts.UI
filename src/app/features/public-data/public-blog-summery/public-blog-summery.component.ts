@@ -10,10 +10,10 @@ import { StyleService } from '../../../../services/style.service';
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  templateUrl: './public-blog-summery.component.html',
+  styleUrl: './public-blog-summery.component.css',
 })
-export class HomeComponent implements OnInit {
+export class PublicBlogSummeryComponent implements OnInit {
   blogs$?: Observable<BlogPost[]>;
   imageLoaded = false;
 

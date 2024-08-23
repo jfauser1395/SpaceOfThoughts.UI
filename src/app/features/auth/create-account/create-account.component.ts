@@ -1,17 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { StyleService } from '../../../../services/style.service';
 import { RegisterRequest } from '../models/register-request.model';
 import { Subscription } from 'rxjs';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-create-account',
@@ -46,6 +41,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // scroll up after loading
     window.scrollTo({
       top: 0,
       left: 0,
@@ -53,6 +49,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     });
     this.styleService.setBodyStyle('overflow', 'hidden');
 
+    // declare a new form group
     this.signUpForm = new FormGroup({
       userName: new FormControl(null, Validators.required),
       email: new FormControl(null, [
@@ -72,7 +69,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
 
       if (
         this.signUpForm.get('password1')?.value ===
-          this.signUpForm.get('password2')?.value &&
+        this.signUpForm.get('password2')?.value &&
         this.signUpForm.get('password1')?.value != ''
       ) {
         this.model.password = this.signUpForm.get('password1')?.value;
@@ -83,7 +80,14 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
           },
           error: (error) => {
             this.requestOk = error.ok;
-            this.errorTitle = error.error.errors[''];
+            this.errorTitle = [];
+
+            // Iterate through the error object
+            for (let key in error.error.errors) {
+                if (error.error.errors.hasOwnProperty(key)) {
+                    this.errorTitle.push(error.error.errors[key]);
+                }
+            }
             this.errorTitleEmail = error.error.errors['email'];
             this.errorTitleUserName = error.error.errors['userName'];
             if(this.errorTitle){
@@ -95,6 +99,7 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
               this.signUpForm.get('email')?.setErrors({ customError: true });
             }
           },
+          
         });
       } else {
         this.passwordIsEqual = false;

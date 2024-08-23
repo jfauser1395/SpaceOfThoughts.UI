@@ -5,7 +5,7 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { BlogpostListComponent } from './features/blog-post/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './features/blog-post/add-blogpost/add-blogpost.component';
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
-import { HomeComponent } from './features/public-data/home/home.component';
+import { PublicBlogSummeryComponent } from './features/public-data/public-blog-summery/public-blog-summery.component';
 import { BlogDetailsComponent } from './features/public-data/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
@@ -15,7 +15,7 @@ import { UserListComponent } from './features/auth/user-list/user-list.component
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: PublicBlogSummeryComponent,
   },
   {
     path: 'create-account',

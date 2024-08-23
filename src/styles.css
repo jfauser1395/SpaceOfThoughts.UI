@@ -1,5 +1,26 @@
 /*Buttons*/
 
+/*buttons inside input fields*/
+.custom-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.inside-btn {
+  background-color: #212529;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: -25px;
+  position: relative;
+  left: -8px;
+}
+/* Prevent background color change on autocomplete */
+input:-webkit-autofill + .inside-btn {
+  background-color: transparent !important;
+}
+
 /*Loading Screen Icon*/
 @keyframes pulse {
   0% {
@@ -24,10 +45,10 @@
 
 @media (max-width: 320px) {
   .loadAnimation img {
-   width: 100%;
-   height: auto;
-   margin-right: 10px;
-   margin-bottom: 50px;
+    width: 100%;
+    height: auto;
+    margin-right: 10px;
+    margin-bottom: 50px;
   }
 }
 
@@ -45,12 +66,10 @@
   color: #d5dfe9;
 }
 
-
 /*primary*/
 .btnPrimary {
   background-color: #d47e92;
   color: black;
-  
 }
 
 .btnPrimary:hover {
@@ -60,7 +79,7 @@
 
 /*Secondary*/
 .btnCustomLogIn {
-  color:#d47e92;
+  color: #d47e92;
   background-color: #212529;
 }
 /*########################################################################*/
