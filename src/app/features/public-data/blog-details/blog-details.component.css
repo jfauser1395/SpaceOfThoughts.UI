@@ -1,5 +1,13 @@
   .full-width {
-    width: 100vw; 
+    width: 90vw; 
     height: auto; 
-    object-fit: cover; 
+    max-height: 800px;
+  }
+
+  @media (max-width: 576px) {
+    .full-width {
+      margin: 0 auto;
+      display: block;
+      width: auto;
+    }
   }

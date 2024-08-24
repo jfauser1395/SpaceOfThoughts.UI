@@ -68,7 +68,7 @@
 /* For screens bigger than 360px wide */
 @media (min-width: 360px) {
   .searchIconSmallScreen {
-    top: 3vh;
+    top: 2vh;
     left: 74%;
   }
 }
@@ -76,7 +76,7 @@
 /* For screens bigger than 375px wide */
 @media (min-width: 375px) {
   .searchIconSmallScreen {
-    top: 3.1vh;
+    top: 2.4vh;
     left: 74%;
   }
 }
@@ -84,8 +84,8 @@
 /* For screens bigger than 390px wide */
 @media (min-width: 390px) {
   .searchIconSmallScreen {
-    top: 3.1vh;
-    left: 74%;
+    top: 2.5vh;
+    left: 75%;
   }
 }
 
@@ -93,7 +93,7 @@
 /* For screens bigger than 414px wide */
 @media (min-width: 414px) {
   .searchIconSmallScreen {
-    top: 3vh;
+    top: 2.2vh;
     left: 74%;
   }
 }
@@ -104,7 +104,7 @@
 
 @media (min-width: 428px) {
   .searchIconLargerScreens {
-    top: 3vh;
+    top: 2.2vh;
     left: 74%;
   }
 }
