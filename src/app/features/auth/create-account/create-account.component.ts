@@ -158,11 +158,6 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.addedUser?.unsubscribe();
-    this.formSubscription?.unsubscribe();
-  }
-
   togglePasswordVisibility() {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
@@ -171,5 +166,10 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
   togglePasswordVisibilityRepeat() {
     this.passwordFieldTypeRepeat =
       this.passwordFieldTypeRepeat === 'password' ? 'text' : 'password';
+  }
+
+  ngOnDestroy(): void {
+    this.addedUser?.unsubscribe();
+    this.formSubscription?.unsubscribe();
   }
 }

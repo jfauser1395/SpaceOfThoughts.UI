@@ -36,12 +36,17 @@
             </p>
 
             <span class="mt-auto d-flex justify-content-end">
+              @if(user === undefined) {
+              <a [routerLink]="['/login']" class="btn btn-dark btnPrimary">
+                Read More</a
+              >
+              } @else{
               <a
                 [routerLink]="['/blog', blog.urlHandle]"
                 class="btn btn-dark btnPrimary"
               >
-                Read More
-              </a>
+                Read More </a
+              >}
             </span>
           </div>
         </div>

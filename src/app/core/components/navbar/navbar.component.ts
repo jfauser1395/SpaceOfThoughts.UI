@@ -2,8 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { User } from '../../../features/auth/models/user.model';
-import { ViewportScroller } from '@angular/common';
-import { flush } from '@angular/core/testing';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -18,17 +17,14 @@ export class NavbarComponent implements OnInit {
   isSmallScreen = false;
   isMediumScreen = false;
   searchExpanded = false;
+  private userSubscription?: Subscription;
 
   @ViewChild('searchInput') searchInput!: ElementRef;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private viewportScroller: ViewportScroller
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.user().subscribe({
+    this.userSubscription = this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
         if (this.user) {
@@ -51,6 +47,7 @@ export class NavbarComponent implements OnInit {
     this.isSmallScreen = width < 576;
     this.isMediumScreen = width < 992;
   }
+
   toggleSearchBar() {
     if (this.searchExpanded == false) {
       this.searchExpanded = true;
@@ -62,5 +59,9 @@ export class NavbarComponent implements OnInit {
   collapseSearch() {
     this.searchExpanded = false;
     this.searchInput.nativeElement.value = '';
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription?.unsubscribe();
   }
 }

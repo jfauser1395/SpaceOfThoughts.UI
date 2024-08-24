@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const userAuthGuard: CanActivateFn = (route, state) => {
   const cookieService = inject(CookieService);
   const authService = inject(AuthService);
   const router = inject(Router);
@@ -29,7 +29,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       });
     } else {
       // Token is still valid
-      if (user.roles.includes('Writer')) {
+      if (user.roles.includes('Reader') || user.roles.includes('Writer')) {
         return true;
       } else {
         alert('Unauthorized');

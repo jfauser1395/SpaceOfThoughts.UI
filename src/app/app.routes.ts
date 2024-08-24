@@ -11,6 +11,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { CreateAccountComponent } from './features/auth/create-account/create-account.component';
 import { authGuard } from './features/auth/guards/auth.guard';
 import { UserListComponent } from './features/auth/user-list/user-list.component';
+import { userAuthGuard } from './features/auth/guards/user-auth.guard';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,7 @@ export const routes: Routes = [
   {
     path: 'blog/:url',
     component: BlogDetailsComponent,
+    canActivate: [userAuthGuard],
   },
   {
     path: 'admin/categories',
@@ -59,7 +61,7 @@ export const routes: Routes = [
     component: EditBlogpostComponent,
     canActivate: [authGuard],
   },
-  { 
+  {
     path: 'admin/users',
     component: UserListComponent,
     canActivate: [authGuard],

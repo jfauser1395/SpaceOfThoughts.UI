@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogPostService } from '../../blog-post/services/blog-post.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BlogPost } from '../../blog-post/models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StyleService } from '../../../../services/style.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { User } from '../../auth/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -16,19 +18,34 @@ import { StyleService } from '../../../../services/style.service';
 export class PublicBlogSummeryComponent implements OnInit {
   blogs$?: Observable<BlogPost[]>;
   imageLoaded = false;
+  user?: User;
+  userSubscription?: Subscription;
 
   constructor(
     private blogPostService: BlogPostService,
-    private loadingIconService: StyleService
+    private loadingIconService: StyleService,
+    private authService: AuthService
   ) {}
   ngOnInit(): void {
-    this.blogs$ = this.blogPostService.getAllBlogPosts();
-
+    // scroll up
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     });
+    // get user
+    this.userSubscription = this.authService.user().subscribe({
+      next: (response) => {
+        this.user = response;
+      },
+    });
+
+    this.user = this.authService.getUser();
+
+    // get blogs
+    this.blogs$ = this.blogPostService.getAllBlogPosts();
+
+   
   }
 
   loadImageOn() {
