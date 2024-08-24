@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginRequest } from '../models/login-request.model';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { StyleService } from '../../../../services/style.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +16,8 @@ import { StyleService } from '../../../../services/style.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
+  private user?: Subscription;
+  private formSubscription?: Subscription;
   model: LoginRequest;
   errorTitle: string[] = [];
   requestOk: boolean = true;
@@ -52,6 +49,18 @@ export class LoginComponent implements OnInit {
       email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
     });
+
+    // subscribe to valueChanges observable
+    this.formSubscription = this.loginFormGroup.valueChanges.subscribe(() => {
+      this.resetFormErrors();
+    });
+  }
+
+  // define the resetFormErrors method
+  resetFormErrors(): void {
+    Object.keys(this.loginFormGroup.controls).forEach((key) => {
+      this.loginFormGroup.get(key)?.setErrors(null);
+    });
   }
 
   onFormSubmit() {
@@ -59,7 +68,7 @@ export class LoginComponent implements OnInit {
       this.model.email = this.loginFormGroup.get('email')?.value;
       this.model.password = this.loginFormGroup.get('password')?.value;
 
-      this.authService.login(this.model).subscribe({
+      this.user = this.authService.login(this.model).subscribe({
         next: (response) => {
           // Set Auth Cookie
           this.cookieService.set(
@@ -84,7 +93,6 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/');
         },
         error: (error) => {
-          console.log(error);
           this.requestOk = error.ok;
           this.errorTitle = [];
 
@@ -110,5 +118,10 @@ export class LoginComponent implements OnInit {
   togglePasswordVisibility() {
     this.passwordFieldType =
       this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+  ngOnDestroy(): void {
+    this.user?.unsubscribe();
+    this.formSubscription?.unsubscribe();
   }
 }

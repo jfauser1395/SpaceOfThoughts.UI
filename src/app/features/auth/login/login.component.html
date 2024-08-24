@@ -26,12 +26,11 @@
             <small class="text-danger justify-content-start mt-2">
               *This field is required
             </small>
-            } @else if(!requestOk && errorTitle){ @for(error of errorTitle;
-            track error){
-            <small class="text-danger justify-content-start mt-2">
-              *{{ error }}
-            </small>
-            } }
+            } @else if(loginFormGroup.get('email')?.invalid && !requestOk && errorTitle){ 
+              <small class="text-danger justify-content-start mt-2">
+                *{{ errorTitle }}
+              </small>
+              } 
           </div>
         </div>
 
@@ -67,12 +66,11 @@
             <small class="text-danger justify-content-start mt-2">
               *This field is required
             </small>
-            } @else if(!requestOk && errorTitle){ @for(error of errorTitle;
-            track error){
+            } @else if(loginFormGroup.get('password')?.invalid && !requestOk && errorTitle){ 
             <small class="text-danger justify-content-start mt-2">
-              *{{ error }}
+              *{{ errorTitle }}
             </small>
-            } }
+            } 
           </div>
         </div>
         <div class="mt-3">
