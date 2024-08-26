@@ -21,6 +21,7 @@ export class ImageSelectorComponent implements OnInit {
   @ViewChild('form', { static: false }) imageUploadForm?: NgForm;
 
   constructor(private imageService: ImageService) {}
+  
   ngOnInit(): void {
     this.getImages();
   }

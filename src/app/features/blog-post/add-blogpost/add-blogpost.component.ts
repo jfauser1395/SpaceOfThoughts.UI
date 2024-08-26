@@ -31,6 +31,7 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
 
   imageSelectorSubscription?: Subscription;
 
+
   constructor(
     private blogpostService: BlogPostService,
     private categoryService: CategoryService,
@@ -62,7 +63,6 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(): void {
-    console.log(this.model);
     this.blogpostService.createBlogPost(this.model).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/admin/blogposts');
