@@ -17,7 +17,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   deleteUserSubscription$?: Subscription;
   usersQuant$?: Subscription;
   totalCount!: number;
-  //adminEmail: string = 'admin@artblog.com'; // needs to be adjusted in production
   list: number[] = [];
   pageNumber = 1;
   pageSize = 5;
