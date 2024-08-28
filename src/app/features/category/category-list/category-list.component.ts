@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,22 +12,25 @@ import { CommonModule } from '@angular/common';
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.css',
 })
-export class CategoryListComponent {
+export class CategoryListComponent implements OnInit, OnDestroy {
   categories$?: Observable<Category[]>;
-  totalCount?: number;
+  categoryQuant$?: Subscription;
+  totalCount!: number;
   list: number[] = [];
   pageNumber = 1;
-  pageSize = 6;
+  pageSize = 4;
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService.getCategoryCount().subscribe({
+    // get total category count
+    this.categoryQuant$ = this.categoryService.getCategoryCount().subscribe({
       next: (value) => {
         this.totalCount = value;
 
         this.list = new Array(Math.ceil(value / this.pageSize));
 
+        // get all categories
         this.categories$ = this.categoryService.getAllCategories(
           undefined,
           undefined,
@@ -53,12 +56,12 @@ export class CategoryListComponent {
 
   getPage(pageNumber: number) {
     this.pageNumber = pageNumber;
-    
+
     this.categories$ = this.categoryService.getAllCategories(
       undefined,
       undefined,
       undefined,
-      pageNumber,
+      this.pageNumber,
       this.pageSize
     );
   }
@@ -91,5 +94,9 @@ export class CategoryListComponent {
       this.pageNumber,
       this.pageSize
     );
+  }
+
+  ngOnDestroy(): void {
+    this.categoryQuant$?.unsubscribe();
   }
 }

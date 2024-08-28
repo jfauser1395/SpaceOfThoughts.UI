@@ -4,11 +4,11 @@
   <div class="container">
     <!-- Brand name of the website -->
     <div class="flex">
-    <a class="navbar-brand blogFontThemeNav align-items-start" href="#"
-      >Space of Thoughts</a
-    >
+      <a class="navbar-brand blogFontThemeNav align-items-start" href="#"
+        >Space of Thoughts</a
+      >
     </div>
-    
+
     @if(isSmallScreen){
     <div
       class="searchIconAnimation searchIconSmallScreen searchIconLargerScreen"
@@ -16,12 +16,12 @@
     >
       <input
         #searchInput
-        (keyup.enter)="collapseSearch()"
+        (keyup.enter)="collapseSearch(searchInput.value)"
         type="search"
         class="searchIconAnimationInput"
         placeholder="Search blog ..."
       />
-      <i class="fa" (click)="toggleSearchBar()"
+      <i class="fa" (click)="toggleSearchBar(searchInput.value)"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -40,6 +40,8 @@
     } @else {
     <div class="custom-input-group custom-input mt-1">
       <input
+        #searchInput
+        (keyup.enter)="blogPostService.navSort.next(searchInput.value)"
         type="text"
         class="form-control border-0"
         id="search-blog"
@@ -47,7 +49,12 @@
         aria-label="Search the Blog"
         aria-describedby="search-blog"
       />
-      <button class="btn btn-dark btnIcons inside-btn me-2" type="button" aria-label="search">
+      <button
+        class="btn btn-dark btnIcons inside-btn me-2"
+        (click)="blogPostService.navSort.next(searchInput.value)"
+        type="button"
+        aria-label="search"
+      >
         <!-- SVG is the search icon -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -66,23 +73,23 @@
 
     }
     <div class="mb-1.5">
-    <!-- Button toggles the navbar on smaller screens -->
-    <button
-      class="navbar-toggler collapsed d-flex d-lg-none flex-column"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <div class="">
-        <!-- Spans are the lines in the hamburger icon -->
-        <span class="toggler-icon top-bar"></span>
-        <span class="toggler-icon middle-bar"></span>
-        <span class="toggler-icon bottom-bar"></span>
-      </div>
-    </button>
+      <!-- Button toggles the navbar on smaller screens -->
+      <button
+        class="navbar-toggler collapsed d-flex d-lg-none flex-column"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <div class="">
+          <!-- Spans are the lines in the hamburger icon -->
+          <span class="toggler-icon top-bar"></span>
+          <span class="toggler-icon middle-bar"></span>
+          <span class="toggler-icon bottom-bar"></span>
+        </div>
+      </button>
     </div>
     @if(isMediumScreen) {
     <!-- Div contains the actual navigation links -->
@@ -235,7 +242,11 @@
       <!--  login/logout functionality -->
       <div class="d-flex">
         @if(user === undefined) {
-        <a [routerLink]="['/login']" class="btn btn-link btnIcons mt-1 me-2" aria-label="login">
+        <a
+          [routerLink]="['/login']"
+          class="btn btn-link btnIcons mt-1 me-2"
+          aria-label="login"
+        >
           <!-- SVG is the user icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"

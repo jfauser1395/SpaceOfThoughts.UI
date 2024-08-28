@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import { BlogPostService } from '../services/blog-post.service';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../category/services/category.service';
-import { Observable, Subscribable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';

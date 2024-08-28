@@ -23,7 +23,6 @@ export class BlogDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private blogPostService: BlogPostService,
-    private loadingIconService: StyleService
   ) {}
 
   ngOnInit(): void {

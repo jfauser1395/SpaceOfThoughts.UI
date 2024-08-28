@@ -33,11 +33,11 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   categories$?: Observable<Category[]>;
   selectedCategories?: string[];
 
-  routeSubscribtion?: Subscription;
-  getBlogPostSubscribtion?: Subscription;
-  updateBlogPostSubscription?: Subscription;
-  deleteBlogPostSubscription?: Subscription;
-  imageSelectSubscription?: Subscription;
+  routeSubscribtion$?: Subscription;
+  getBlogPostSubscribtion$?: Subscription;
+  updateBlogPostSubscription$?: Subscription;
+  deleteBlogPostSubscription$?: Subscription;
+  imageSelectSubscription$?: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,13 +50,13 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
 
-    this.routeSubscribtion = this.route.paramMap.subscribe({
+    this.routeSubscribtion$ = this.route.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
 
         // Get BlogPost from API
         if (this.id) {
-          this.getBlogPostSubscribtion = this.blogPostService
+          this.getBlogPostSubscribtion$ = this.blogPostService
             .getBlogPostById(this.id)
             .subscribe({
               next: (response) => {
@@ -66,7 +66,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
             });
         }
 
-        this.imageSelectSubscription = this.imageService
+        this.imageSelectSubscription$ = this.imageService
           .onSelectImage()
           .subscribe({
             next: (response) => {
@@ -94,7 +94,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         categories: this.selectedCategories ?? [],
       };
 
-      this.updateBlogPostSubscription = this.blogPostService
+      this.updateBlogPostSubscription$ = this.blogPostService
         .updateBlogPost(this.id, updateBlogPost)
         .subscribe({
           next: (response) => {
@@ -107,7 +107,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   onDelete(): void {
     if (this.id) {
       // Call service and delete blogpost
-      this.deleteBlogPostSubscription = this.blogPostService
+      this.deleteBlogPostSubscription$ = this.blogPostService
         .deleteBlogPost(this.id)
         .subscribe({
           next: (response) => {
@@ -118,10 +118,10 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscribtion?.unsubscribe();
-    this.getBlogPostSubscribtion?.unsubscribe();
-    this.updateBlogPostSubscription?.unsubscribe();
-    this.deleteBlogPostSubscription?.unsubscribe();
-    this.imageSelectSubscription?.unsubscribe();
+    this.routeSubscribtion$?.unsubscribe();
+    this.getBlogPostSubscribtion$?.unsubscribe();
+    this.updateBlogPostSubscription$?.unsubscribe();
+    this.deleteBlogPostSubscription$?.unsubscribe();
+    this.imageSelectSubscription$?.unsubscribe();
   }
 }

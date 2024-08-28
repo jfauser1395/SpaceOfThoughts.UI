@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BlogPostService } from '../services/blog-post.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BlogPost } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 
@@ -12,12 +12,91 @@ import { CommonModule } from '@angular/common';
   templateUrl: './blogpost-list.component.html',
   styleUrl: './blogpost-list.component.css',
 })
-export class BlogpostListComponent {
+export class BlogpostListComponent implements OnInit, OnDestroy {
   blogPost$?: Observable<BlogPost[]>;
-  constructor(private blogpostService: BlogPostService) {}
+  blogPostQuant$?: Subscription;
+  totalCount!: number;
+  list: number[] = [];
+  pageNumber = 1;
+  pageSize = 4;
+
+  constructor(private blogPostService: BlogPostService) {}
 
   ngOnInit(): void {
-    // get all blog posts from the API
-    this.blogPost$ = this.blogpostService.getAllBlogPosts();
+    // get total blogpost count
+    this.blogPostQuant$ = this.blogPostService.getBlogPostCount().subscribe({
+      next: (value) => {
+        this.totalCount = value;
+
+        this.list = new Array(Math.ceil(value / this.pageSize));
+
+        // get all blog posts from the API
+        this.blogPost$ = this.blogPostService.getAllBlogPosts(
+          undefined,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
+      },
+    });
+  }
+
+  onSearch(query: string) {
+    this.blogPost$ = this.blogPostService.getAllBlogPosts(query);
+  }
+
+  sort(sortBy: string, sortDirection: string) {
+    this.blogPost$ = this.blogPostService.getAllBlogPosts(
+      undefined,
+      sortBy,
+      sortDirection
+    );
+  }
+
+  getPage(pageNumber: number) {
+    this.pageNumber = pageNumber;
+
+    this.blogPost$ = this.blogPostService.getAllBlogPosts(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  getNextPage() {
+    if (this.pageNumber + 1 > this.list.length) {
+      return;
+    }
+
+    this.pageNumber += 1;
+    this.blogPost$ = this.blogPostService.getAllBlogPosts(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  getPrevPage() {
+    if (this.pageNumber - 1 < 1) {
+      return;
+    }
+
+    this.pageNumber -= 1;
+    this.blogPost$ = this.blogPostService.getAllBlogPosts(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.blogPostQuant$?.unsubscribe();
   }
 }

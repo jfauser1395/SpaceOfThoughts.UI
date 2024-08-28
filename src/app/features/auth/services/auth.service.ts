@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginResponse } from '../models/login-response.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
@@ -17,8 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   register(request: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/auth/register`, 
-    {
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/auth/register`, {
       userName: request.userName,
       email: request.email,
       password: request.password,
@@ -67,12 +66,49 @@ export class AuthService {
     return undefined;
   }
 
-  getAllUsersFromDatabase(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiBaseUrl}/api/auth/users`)
+  getAllUsersFromDatabase(
+    query?: string,
+    sortBy?: string,
+    sortDirection?: string,
+    pageNumber?: number,
+    pageSize?: number
+  ): Observable<User[]> {
+    let params = new HttpParams();
+
+    if (query) {
+      params = params.set('query', query);
+    }
+
+    if (sortBy) {
+      params = params.set('sortBy', sortBy);
+    }
+
+    if (sortDirection) {
+      params = params.set('sortDirection', sortDirection);
+    }
+
+    if (pageNumber) {
+      params = params.set('pageNumber', pageNumber);
+    }
+
+    if (pageSize) {
+      params = params.set('pageSize', pageSize);
+    }
+
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/api/auth/users`, {
+      params: params,
+    });
+  }
+  getUserCount(): Observable<number> {
+    return this.http.get<number>(
+      `${environment.apiBaseUrl}/api/auth/count`
+    );
   }
 
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${environment.apiBaseUrl}/api/auth/users/${id}`)
+    return this.http.delete<void>(
+      `${environment.apiBaseUrl}/api/auth/users/${id}`
+    );
   }
 
   logout(): void {
