@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   isSmallScreen = false;
   isMediumScreen = false;
   searchExpanded = false;
+  navBarExpanded = false;
   private userSubscription?: Subscription;
   blogPostService = inject(BlogPostService); // to be able to call it directly in html
 
@@ -49,10 +50,16 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  // Check screen size
   checkScreenSize() {
     const width = window.innerWidth;
     this.isSmallScreen = width < 576;
     this.isMediumScreen = width < 992;
+  }
+
+  // Monitor navbar toggle
+  navToggled() {
+    this.navBarExpanded = !this.navBarExpanded;
   }
 
   toggleSearchBar(query: string) {
@@ -61,6 +68,20 @@ export class NavbarComponent implements OnInit {
     } else {
       this.searchExpanded = false;
     }
+
+    // If the searchbar is toggled the navbar is closed
+    if(this.navBarExpanded) {
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      if (navbarToggler) {
+        navbarToggler.classList.toggle('collapsed');
+      }
+      const navbar = document.getElementById('navbarSupportedContent');
+      if (navbar && navbar.classList.contains('show')) {
+        navbar.classList.remove('show');
+      }
+      this.navBarExpanded = false;
+    }
+
     this.blogPostService.navSort.next(query)
   }
 
