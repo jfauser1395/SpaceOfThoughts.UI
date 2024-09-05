@@ -3,40 +3,41 @@
   <!-- Container div holds all elements of the navbar -->
   <div class="container">
     <!-- Brand name of the website -->
-    <div class="flex">
-      <a class="navbar-brand blogFontThemeNav align-items-start" href="#"
-        >Space of Thoughts</a
-      >
-    </div>
+
+    <a class="navbar-brand blogFontThemeNav align-items-start" href="#"
+      >Space of Thoughts</a
+    >
 
     @if(isSmallScreen){
-    <div
-      class="searchIconAnimation searchIconSmallScreen searchIconLargerScreen"
-      [class.expanded]="searchExpanded"
-    >
-      <input
-        #searchInput
-        (keyup.enter)="collapseSearch(searchInput.value)"
-        type="search"
-        class="searchIconAnimationInput"
-        placeholder="Search blog ..."
-      />
-      <i class="fa" (click)="toggleSearchBar(searchInput.value)"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="21"
-          height="21"
-          fill="currentColor"
-          class="bi bi-search"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-          />
-        </svg>
-      </i>
-    </div>
 
+    <div class="d-flex align-items-center justify-content-center mt-2">
+      <div
+        class="searchIconAnimation searchIconSmallScreen searchIconLargerScreen"
+        [class.expanded]="searchExpanded"
+      >
+        <input
+          #searchInput
+          (keyup.enter)="collapseSearch(searchInput.value)"
+          type="search"
+          class="searchIconAnimationInput"
+          placeholder="Search blog ..."
+        />
+        <i class="fa" (click)="toggleSearchBar(searchInput.value)"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            fill="currentColor"
+            class="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+            />
+          </svg>
+        </i>
+      </div>
+    </div>
     } @else {
     <div class="custom-input-group custom-input mt-1">
       <input
