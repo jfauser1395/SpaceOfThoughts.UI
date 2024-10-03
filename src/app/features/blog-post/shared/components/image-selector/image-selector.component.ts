@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, viewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ImageService } from './image.service';
+import { ImageService } from '../services/image.service';
 import { Observable } from 'rxjs';
 import { BlogImage } from '../../models/blog-image.model';
 

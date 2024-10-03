@@ -9,8 +9,8 @@ import { Observable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { CommonModule } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
-import { ImageSelectorComponent } from '../../../shared/components/image-selector/image-selector.component';
-import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { ImageSelectorComponent } from '../shared/components/image-selector/image-selector.component';
+import { ImageService } from '../shared/components/services/image.service';
 
 @Component({
   selector: 'app-add-blogpost',

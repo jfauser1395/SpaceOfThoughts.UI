@@ -11,8 +11,8 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category.service';
 import { Category } from '../../category/models/category.model';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
-import { ImageSelectorComponent } from '../../../shared/components/image-selector/image-selector.component';
-import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { ImageSelectorComponent } from '../shared/components/image-selector/image-selector.component';
+import { ImageService } from '../shared/components/services/image.service';
 
 @Component({
   selector: 'app-edit-blogpost',

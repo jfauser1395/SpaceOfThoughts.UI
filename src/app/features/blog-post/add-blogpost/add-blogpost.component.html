@@ -1,8 +1,12 @@
 <div class="container p-2">
+  <!-- Header for the Add BlogPost form -->
   <h1 class="mt-3">Add BlogPost</h1>
 
+  <!-- Form with Angular's two-way binding, submitting on ngSubmit -->
   <form #form="ngForm" (ngSubmit)="onFormSubmit()">
     <div class="mt-2 mb-5">
+      
+      <!-- Title input field, binds to 'model.title' -->
       <div class="mt-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -10,25 +14,25 @@
           id="title"
           name="title"
           class="form-control"
-          [(ngModel)]="model.title"
+          [(ngModel)]="model.title" 
         />
       </div>
 
+      <!-- URL Handle input field, binds to 'model.urlHandle' -->
       <div class="mt-3">
         <label for="urlHandle" class="form-label">Url Handle</label>
         <input
-          type="urlHandle"
-          id="title"
+          type="text" 
+          id="urlHandle" 
           name="urlHandle"
           class="form-control"
           [(ngModel)]="model.urlHandle"
         />
       </div>
 
+      <!-- Short Description input field -->
       <div class="mt-3">
-        <label for="shortDescription" class="form-label"
-          >Short Description</label
-        >
+        <label for="shortDescription" class="form-label">Short Description</label>
         <input
           type="text"
           id="shortDescription"
@@ -38,9 +42,41 @@
         />
       </div>
 
+      <!-- Featured Image URL input field with an option to select from a modal -->
+      <div class="mt-3">
+        <label for="featuredImageUrl" class="form-label">Featured Image Url</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="featuredImageUrl"
+            name="featuredImageUrl"
+            class="form-control"
+            [(ngModel)]="model.featuredImageUrl"
+          />
+          <!-- Button to trigger image selection modal -->
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#selectModal"
+          >
+            Select Image
+          </button>
+        </div>
+        
+        <!-- Display the selected image if URL is not empty -->
+        @if(model.featuredImageUrl != '') {
+        <div>
+          <img [src]="model.featuredImageUrl" height="100" class="my-2" />
+        </div>
+        }
+      </div>
+
+      <!-- Content editor with live markdown preview -->
       <div class="mt-3">
         <label for="content" class="form-label">Content</label>
         <div class="d-flex flex-row">
+          <!-- Textarea for content entry -->
           <div class="col-6 p-2">
             <textarea
               id="content"
@@ -50,6 +86,7 @@
               [(ngModel)]="model.content"
             ></textarea>
           </div>
+          <!-- Live markdown preview of content -->
           <div
             class="col-6 p-2 scroll scroll--simple"
             style="max-height: 350px; overflow: auto"
@@ -59,37 +96,7 @@
         </div>
       </div>
 
-      <div class="mt-3">
-        <!-- Experimental feature -->
-
-        <!-- <label for="featuredImageUrl" class="form-label"
-          >Featured Image Url: <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#selectModal"
-          >
-            Select Image 
-          </button>
-          </label> -->
-        <label for="featuredImageUrl" class="form-label"
-          >Featured Image Url
-        </label>
-
-        @if(model.featuredImageUrl != ''){
-        <div>
-          <img [src]="model.featuredImageUrl" height="100" class="my-2" />
-        </div>
-        }
-        <input
-          type="text"
-          id="featuredImageUrl"
-          name="featuredImageUrl"
-          class="form-control"
-          [(ngModel)]="model.featuredImageUrl"
-        />
-      </div>
-
+      <!-- Published Date input field -->
       <div class="mt-3">
         <label for="publishedDate" class="form-label">Published Date</label>
         <input
@@ -103,6 +110,7 @@
         />
       </div>
 
+      <!-- Author input field -->
       <div class="mt-3">
         <label for="author" class="form-label">Author</label>
         <input
@@ -114,6 +122,7 @@
         />
       </div>
 
+      <!-- Checkbox to toggle visibility of the blog post -->
       <div class="form-check mt-3">
         <input
           class="form-check-input"
@@ -122,12 +131,13 @@
           [(ngModel)]="model.isVisible"
           name="isVisible"
         />
-        <label class="form-check-label" for="isVisible"> Is Visible? </label>
+        <label class="form-check-label" for="isVisible">Is Visible?</label>
       </div>
 
+      <!-- Categories selection dropdown (allows multiple selections) -->
       <div class="mt-3">
-        <label for="categories" class="from-label">Categories</label>
-        @if(categories$ | async; as categories){
+        <label for="categories" class="form-label">Categories</label>
+        @if(categories$ | async; as categories) {
         <select
           class="form-control scroll scroll--simple"
           [(ngModel)]="model.categories"
@@ -136,15 +146,15 @@
           multiple
           style="height: 70px; overflow: auto"
         >
-          @for( category of categories; track category) {
-          <option [value]="category.id">
-            {{ category.name }}
-          </option>
+          <!-- Loop through categories to create options -->
+          @for(category of categories; track category) {
+          <option [value]="category.id">{{ category.name }}</option>
           }
         </select>
         }
       </div>
 
+      <!-- Button to submit the form -->
       <div class="mt-3">
         <button type="submit" class="btn btn-success">Save</button>
       </div>
@@ -152,6 +162,7 @@
   </form>
 </div>
 
+<!-- Modal for image selection component -->
 <div
   class="modal fade"
   id="selectModal"
@@ -159,5 +170,6 @@
   aria-labelledby="selectModalLabel"
   aria-hidden="true"
 >
+  <!-- Custom image selector component to choose a featured image -->
   <app-image-selector></app-image-selector>
 </div>

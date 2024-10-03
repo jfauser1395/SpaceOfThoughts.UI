@@ -114,6 +114,12 @@ input:-webkit-autofill + .inside-btn {
 
 /* Custom scrollbar */
 
+.scrollHight {
+  height: 1300px;
+  width: 100%;
+  padding-top: 56px;
+  min-height: 0;
+}
 html {
   background: linear-gradient(left, #99a, #eee, #99a);
 }
