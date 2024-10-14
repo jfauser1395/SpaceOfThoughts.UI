@@ -16,9 +16,11 @@
         [class.expanded]="searchExpanded"
       >
         <input
+          type="search"
+          id="searchSmall"
+          name="searchSmall"
           #searchInput
           (keyup.enter)="collapseSearch(searchInput.value)"
-          type="search"
           class="searchIconAnimationInput"
           placeholder="Search blog ..."
         />

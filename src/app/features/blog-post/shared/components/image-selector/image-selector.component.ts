@@ -13,15 +13,15 @@ import { BlogImage } from '../../models/blog-image.model';
   styleUrl: './image-selector.component.css',
 })
 export class ImageSelectorComponent implements OnInit {
+  @ViewChild('form') form?: NgForm;
   private file?: File;
+  imageUrl?: string;
   fileName: string = '';
   title: string = '';
   images$?: Observable<BlogImage[]>;
 
-  @ViewChild('form', { static: false }) imageUploadForm?: NgForm;
-
   constructor(private imageService: ImageService) {}
-  
+
   ngOnInit(): void {
     this.getImages();
   }
@@ -38,18 +38,19 @@ export class ImageSelectorComponent implements OnInit {
         .uploadImage(this.file, this.fileName, this.title)
         .subscribe({
           next: (response) => {
-            this.imageUploadForm?.resetForm();
-            this.getImages();
+            this.getImages(); // Get all images again
+            this.selectImage(response); // Send image Url to the parent component
+            this.form?.resetForm(); // Reset the form // Reset form after successful submission
           },
         });
     }
   }
 
-  selectImage(image: BlogImage): void{
+  selectImage(image: BlogImage): void {
     this.imageService.selectImage(image);
   }
 
-  private getImages() {
+  getImages() {
     this.images$ = this.imageService.getAllImages();
   }
 }

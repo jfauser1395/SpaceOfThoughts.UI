@@ -2,10 +2,9 @@
   <!-- Header for the Add BlogPost form -->
   <h1 class="mt-3">Add BlogPost</h1>
 
-  <!-- Form with Angular's two-way binding, submitting on ngSubmit -->
-  <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+  <!-- Form for blog infos with Angular's two-way binding, submitting on ngSubmit -->
+  <form #form="ngForm" (ngSubmit)="onFormSubmit()" name="blogEntries">
     <div class="mt-2 mb-5">
-      
       <!-- Title input field, binds to 'model.title' -->
       <div class="mt-3">
         <label for="title" class="form-label">Title</label>
@@ -14,7 +13,7 @@
           id="title"
           name="title"
           class="form-control"
-          [(ngModel)]="model.title" 
+          [(ngModel)]="model.title"
         />
       </div>
 
@@ -22,8 +21,8 @@
       <div class="mt-3">
         <label for="urlHandle" class="form-label">Url Handle</label>
         <input
-          type="text" 
-          id="urlHandle" 
+          type="text"
+          id="urlHandle"
           name="urlHandle"
           class="form-control"
           [(ngModel)]="model.urlHandle"
@@ -32,7 +31,9 @@
 
       <!-- Short Description input field -->
       <div class="mt-3">
-        <label for="shortDescription" class="form-label">Short Description</label>
+        <label for="shortDescription" class="form-label"
+          >Short Description</label
+        >
         <input
           type="text"
           id="shortDescription"
@@ -44,7 +45,9 @@
 
       <!-- Featured Image URL input field with an option to select from a modal -->
       <div class="mt-3">
-        <label for="featuredImageUrl" class="form-label">Featured Image Url</label>
+        <label for="featuredImageUrl" class="form-label"
+          >Featured Image Url</label
+        >
         <div class="input-group">
           <input
             type="text"
@@ -63,20 +66,20 @@
             Select Image
           </button>
         </div>
-        
+
         <!-- Display the selected image if URL is not empty -->
         @if(model.featuredImageUrl != '') {
         <div>
-          <img [src]="model.featuredImageUrl" height="100" class="my-2" />
+          <img [src]="model.featuredImageUrl" height="100" class="ms-1 mt-2 rounded-2" />
         </div>
         }
       </div>
 
-      <!-- Content editor with live markdown preview -->
-      <div class="mt-3">
-        <label for="content" class="form-label">Content</label>
-        <div class="d-flex flex-row">
-          <!-- Textarea for content entry -->
+       <!-- Content editor with live markdown preview -->
+       <div class="mt-4 card">
+        <div class="card-header">Content</div>
+        <div class="d-flex flex-row card-body">
+          <!-- Textarea for editing blog content -->
           <div class="col-6 p-2">
             <textarea
               id="content"
@@ -86,7 +89,7 @@
               [(ngModel)]="model.content"
             ></textarea>
           </div>
-          <!-- Live markdown preview of content -->
+          <!-- Live markdown preview of the blog content -->
           <div
             class="col-6 p-2 scroll scroll--simple"
             style="max-height: 350px; overflow: auto"
@@ -128,21 +131,21 @@
           class="form-check-input"
           type="checkbox"
           id="isVisible"
-          [(ngModel)]="model.isVisible"
           name="isVisible"
+          [(ngModel)]="model.isVisible"
         />
-        <label class="form-check-label" for="isVisible">Is Visible?</label>
+        <label class="form-check-label" for="isVisible">publish</label>
       </div>
 
       <!-- Categories selection dropdown (allows multiple selections) -->
       <div class="mt-3">
-        <label for="categories" class="form-label">Categories</label>
         @if(categories$ | async; as categories) {
+        <label for="categories" class="form-label">Categories</label>
         <select
           class="form-control scroll scroll--simple"
           [(ngModel)]="model.categories"
-          name="categories"
           id="categories"
+          name="categories"
           multiple
           style="height: 70px; overflow: auto"
         >

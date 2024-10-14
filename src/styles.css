@@ -74,6 +74,7 @@ input:-webkit-autofill + .inside-btn {
 
 .btnPrimary:hover {
   background-color: #a66776;
+  box-shadow: 0 0 14px 1px #a66776; 
   color: white;
 }
 
@@ -104,6 +105,7 @@ input:-webkit-autofill + .inside-btn {
 
 .blogFontThemeNav:hover {
   color: #d5dfe9;
+  text-shadow: 6px 5px 9px #a66776; 
 }
 
 .blogFontTheme {

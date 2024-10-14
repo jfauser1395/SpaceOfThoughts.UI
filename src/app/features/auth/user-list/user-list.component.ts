@@ -47,7 +47,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
   setUserId(userId: string) {
     this.id = userId;
-    console.log(this.id);
   }
   onDelete(): void {
     if (this.id) {
