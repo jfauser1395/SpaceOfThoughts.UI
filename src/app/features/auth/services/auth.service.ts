@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   register(request: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/auth/register`, {
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Auth/register`, {
       userName: request.userName,
       email: request.email,
       password: request.password,
@@ -26,7 +26,7 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
-      `${environment.apiBaseUrl}/api/auth/login`,
+      `${environment.apiBaseUrl}/api/Auth/login`,
       {
         email: request.email,
         password: request.password,
@@ -95,19 +95,19 @@ export class AuthService {
       params = params.set('pageSize', pageSize);
     }
 
-    return this.http.get<User[]>(`${environment.apiBaseUrl}/api/auth/users`, {
+    return this.http.get<User[]>(`${environment.apiBaseUrl}/api/Auth/users`, {
       params: params,
     });
   }
   getUserCount(): Observable<number> {
     return this.http.get<number>(
-      `${environment.apiBaseUrl}/api/auth/count`
+      `${environment.apiBaseUrl}/api/Auth/count`
     );
   }
 
   deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(
-      `${environment.apiBaseUrl}/api/auth/users/${id}`
+      `${environment.apiBaseUrl}/api/Auth/users/${id}`
     );
   }
 

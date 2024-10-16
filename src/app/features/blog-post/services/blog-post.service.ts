@@ -14,7 +14,7 @@ export class BlogPostService {
 
   createBlogPost(data: AddBlogPost): Observable<BlogPost> {
     return this.http.post<BlogPost>(
-      `${environment.apiBaseUrl}/api/blogposts?addAuth=true`,
+      `${environment.apiBaseUrl}/api/Blogposts?addAuth=true`,
       data
     );
   }
@@ -49,7 +49,7 @@ export class BlogPostService {
     }
 
     return this.http.get<BlogPost[]>(
-      `${environment.apiBaseUrl}/api/blogposts`,
+      `${environment.apiBaseUrl}/api/Blogposts`,
       { params: params }
     );
   }
@@ -62,7 +62,7 @@ export class BlogPostService {
 
   getBlogPostById(id: string): Observable<BlogPost> {
     return this.http.get<BlogPost>(
-      `${environment.apiBaseUrl}/api/blogposts/${id}`
+      `${environment.apiBaseUrl}/api/Blogposts/${id}`
     );
   }
 
@@ -71,7 +71,7 @@ export class BlogPostService {
 
   getBlogPostByUrlHandle(urlHandle: string): Observable<BlogPost> {
     return this.http.get<BlogPost>(
-      `${environment.apiBaseUrl}/api/blogposts/${urlHandle}`
+      `${environment.apiBaseUrl}/api/Blogposts/${urlHandle}`
     );
   }
 
@@ -80,7 +80,7 @@ export class BlogPostService {
     updateBlogPost: UpdateBlogPost
   ): Observable<BlogPost> {
     return this.http.put<BlogPost>(
-      `${environment.apiBaseUrl}/api/blogposts/${id}?addAuth=true`,
+      `${environment.apiBaseUrl}/api/Blogposts/${id}?addAuth=true`,
       updateBlogPost
     );
   }
