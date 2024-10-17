@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ImageService } from '../services/image.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BlogImage } from '../../models/blog-image.model';
 
 @Component({
@@ -12,16 +12,22 @@ import { BlogImage } from '../../models/blog-image.model';
   templateUrl: './image-selector.component.html',
   styleUrl: './image-selector.component.css',
 })
-export class ImageSelectorComponent implements OnInit {
+export class ImageSelectorComponent implements OnInit, OnDestroy {
   @ViewChild('form') form?: NgForm;
   private file?: File;
   imageUrl?: string;
   fileName: string = '';
   title: string = '';
   images$?: Observable<BlogImage[]>;
+  sortedBy: string;
+  sortDirection: string;
+  deleteUploadedImage$?: Subscription;
 
-  constructor(private imageService: ImageService) {}
-
+  constructor(private imageService: ImageService) {
+    this.sortedBy = 'DateCreated';
+    this.sortDirection = 'asc';
+  }
+  
   ngOnInit(): void {
     this.getImages();
   }
@@ -50,7 +56,24 @@ export class ImageSelectorComponent implements OnInit {
     this.imageService.selectImage(image);
   }
 
+  deleteImage(image: BlogImage): void {
+    if (image.id) {
+      this.deleteUploadedImage$ = this.imageService.deleteUploadedImage(image.id).subscribe({
+        next: (response) => {
+          this.getImages();
+        },
+      });
+    }
+  }
+
   getImages() {
-    this.images$ = this.imageService.getAllImages();
+    this.images$ = this.imageService.getAllImages(
+      this.sortedBy,
+      this.sortDirection
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.deleteUploadedImage$?.unsubscribe();
   }
 }

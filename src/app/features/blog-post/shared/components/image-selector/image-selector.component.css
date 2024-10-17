@@ -13,12 +13,16 @@
 }
 
 .imgStyle {
-  flex: 1 1 300px; /* Allow the item to grow and shrink with a base size */
-  max-width: 300px; /* Keep a consistent maximum width */
+  flex: 1 1 200px; /* Allow the item to grow and shrink with a base size */
+  max-width: 200px; /* Keep a consistent maximum width */
 }
 
 .custom-image {
   width: 100%; /* The image will fill its container */
   aspect-ratio: 1 / 1; /* Ensures the image has a 1:1 aspect ratio */
   display: block; /* Ensures the image doesn't have extra spacing */
+}
+
+.pictureWindow {
+  height: 450px; /* Adjust picture window */
 }

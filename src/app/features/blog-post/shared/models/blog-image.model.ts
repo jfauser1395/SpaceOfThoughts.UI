@@ -3,5 +3,6 @@ export interface BlogImage {
     fileName: string;
     title: string;
     fileExtension: string;
+    dateCreated: string;
     url: string;
 }
