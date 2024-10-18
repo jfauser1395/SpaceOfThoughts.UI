@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private cookieService: CookieService,
     private router: Router,
-    private styleService: StyleService
+    private styleService: StyleService,
   ) {
     this.model = {
       email: '',
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
             '/',
             undefined,
             true,
-            'Strict'
+            'Strict',
           );
 
           // Set User

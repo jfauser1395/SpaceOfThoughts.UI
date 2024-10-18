@@ -5,6 +5,7 @@ import { BlogPost } from '../models/blog-post.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +52,12 @@ export class BlogPostService {
     return this.http.get<BlogPost[]>(
       `${environment.apiBaseUrl}/api/Blogposts`,
       { params: params }
+    );
+  }
+
+  checkIfImagesEmpty(): Observable<boolean> {
+    return this.getAllBlogPosts().pipe(
+      map(blogs => blogs.length === 0)
     );
   }
 

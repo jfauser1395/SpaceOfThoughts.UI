@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { BlogImage } from '../../models/blog-image.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,12 @@ export class ImageService {
     return this.http.get<BlogImage[]>(`${environment.apiBaseUrl}/api/Images`, {
       params: params,
     });
+  }
+
+  checkIfImagesEmpty(): Observable<boolean> {
+    return this.getAllImages().pipe(
+      map(images => images.length === 0)
+    );
   }
 
   uploadImage(

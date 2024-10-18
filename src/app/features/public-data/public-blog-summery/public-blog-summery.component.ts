@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BlogPostService } from '../../blog-post/services/blog-post.service';
-import { Observable, Subscription } from 'rxjs';
+import { isEmpty, Observable, Subscription } from 'rxjs';
 import { BlogPost } from '../../blog-post/models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,6 +23,8 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
   sortedBy: string;
   sortDirection: string;
   navBarSearch$?: Subscription;
+  blogsEmptySubscribtion$?: Subscription;
+  noBlogs?: boolean;
 
   constructor(
     private blogPostService: BlogPostService,
@@ -32,7 +34,7 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
     this.sortedBy = 'publishedDate';
     this.sortDirection = 'desc';
 
-    // search bar from the nav
+    // search bar from the nav component
     this.navBarSearch$ = this.blogPostService.navSort.subscribe(
       (query: string) => this.onSearch(query)
     );
@@ -46,7 +48,7 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
       behavior: 'smooth',
     });
 
-    // get user
+    // get user to validate access rights for blog details and redirect to login page
     this.userSubscription$ = this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
@@ -60,6 +62,11 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
       this.sortedBy,
       this.sortDirection
     );
+    
+    // check if there are blogs in the database
+    this.blogsEmptySubscribtion$ = this.blogPostService.checkIfImagesEmpty().subscribe((isEmpty) => {
+      this.noBlogs = isEmpty
+    });
   }
 
   onSearch(query: string) {
@@ -76,5 +83,6 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.navBarSearch$?.unsubscribe();
     this.userSubscription$?.unsubscribe();
+    this.blogsEmptySubscribtion$?.unsubscribe();
   }
 }
