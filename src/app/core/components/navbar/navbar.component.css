@@ -1,7 +1,9 @@
-/* search icon styling */
+/* Search icon styling */
 .searchIconAnimation {
   position: absolute;
-  transition: width 0.7s, transform 0.7s;
+  transition:
+    width 0.7s,
+    transform 0.7s;
   width: 35px;
   height: 35px;
   background: #212529;
@@ -11,6 +13,7 @@
   z-index: 1;
 }
 
+/* Search icon animation */
 .searchIconAnimationInput {
   position: absolute;
   top: 0;
@@ -19,8 +22,8 @@
   height: 35px;
   line-height: 30px;
   background: white;
-  outline: 0;
-  border: 0;
+  outline: none;
+  border: none;
   font-size: 1em;
   border-radius: 20px;
   padding: 0 20px;
@@ -29,6 +32,7 @@
   transition: opacity 0.7s;
 }
 
+/* Font Awesome icon styling */
 .fa {
   position: absolute;
   top: 6px;
@@ -39,17 +43,19 @@
   transition: all 0.7s;
 }
 
+/* Expanded state of search icon */
 .searchIconAnimation.expanded {
   width: 94%;
   cursor: pointer;
   transform: translateX(-75%);
 }
 
+/* Make search input visible in expanded state */
 .searchIconAnimation.expanded .searchIconAnimationInput {
   opacity: 1;
 }
 
-/*styling for smaller screens*/
+/* Styling for smaller screens */
 .searchIconSmallScreen {
   position: absolute;
 }
@@ -89,6 +95,7 @@
   }
 }
 
+/* Larger screen search icon styling */
 .searchIconLargerScreens {
   position: absolute;
 }
@@ -99,20 +106,20 @@
   }
 }
 
-/* search input field */
+/* Search input field */
 .custom-input {
   align-items: stretch;
   width: 100%;
 }
 
+/* Limit search input width on smaller screens */
 @media (max-width: 992px) {
   .custom-input {
     max-width: 50%;
   }
 }
 
-/* Toggle Navbar icon styling*/
-
+/* Toggle Navbar icon styling */
 .navbar-toggler {
   width: 20px;
   height: 20px;
@@ -120,13 +127,14 @@
   transition: 0.5s ease-in-out;
 }
 
+/* Hamburger icon toggle */
 .navbar-toggler,
 .navbar-toggler:focus,
 .navbar-toggler:active,
 .navbar-toggler-icon:focus {
   outline: none;
   box-shadow: none;
-  border: 0;
+  border: none;
   position: relative;
 }
 
@@ -135,6 +143,7 @@
   padding: 0;
 }
 
+/* Icon styling for navbar toggler */
 .toggler-icon {
   display: block;
   position: absolute;
@@ -148,12 +157,12 @@
   transition: 0.25s ease-in-out;
 }
 
+/* Margin for the middle bar */
 .middle-bar {
   margin-top: 0px;
 }
 
 /* State when the navbar is collapsed */
-
 .navbar-toggler.collapsed .top-bar {
   position: absolute;
   top: 0px;
@@ -173,8 +182,7 @@
   transform: rotate(0deg);
 }
 
-/* when navigation is clicked */
-
+/* When navigation is clicked */
 .navbar-toggler .top-bar {
   top: 9px;
   transform: rotate(135deg);
@@ -191,8 +199,7 @@
   transform: rotate(-135deg);
 }
 
-/* Color of 3 lines */
-
+/* Color of the 3 lines in toggler icon */
 .navbar-toggler.collapsed .toggler-icon {
   background: linear-gradient(263deg, #a66776 0%, white 100%);
 }

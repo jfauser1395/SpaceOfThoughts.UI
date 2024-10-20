@@ -1,3 +1,11 @@
+/* Pagination */
+/* Remove outline and box-shadow from pagination links */
+.page-link {
+  outline: none;
+  box-shadow: none;
+}
+
+/*########################################################################*/
 /*Buttons*/
 
 /*buttons inside input fields*/
@@ -83,8 +91,9 @@ input:-webkit-autofill + .inside-btn {
   color: #d47e92;
   background-color: #212529;
 }
+
 /*########################################################################*/
-/*fonts*/
+/*Fonts*/
 @font-face {
   font-family: NavFont;
   src: url("../public/assets/fonts/Magiesta.ttf");

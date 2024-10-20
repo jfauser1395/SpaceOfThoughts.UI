@@ -6,9 +6,10 @@ import { environment } from '../../../../../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', // This service will be provided at the root level
 })
 export class ImageService {
+  // BehaviorSubject to store and emit the selected image
   selectedImage: BehaviorSubject<BlogImage> = new BehaviorSubject<BlogImage>({
     id: '',
     fileExtension: '',
@@ -20,16 +21,15 @@ export class ImageService {
 
   constructor(private http: HttpClient) {}
 
+  // Get all images with optional sorting
   getAllImages(
     sortBy?: string,
-    sortDirection?: string
+    sortDirection?: string,
   ): Observable<BlogImage[]> {
     let params = new HttpParams();
-
     if (sortBy) {
       params = params.set('sortBy', sortBy);
     }
-
     if (sortDirection) {
       params = params.set('sortDirection', sortDirection);
     }
@@ -38,39 +38,41 @@ export class ImageService {
     });
   }
 
+  // Check if there are no images available
   checkIfImagesEmpty(): Observable<boolean> {
-    return this.getAllImages().pipe(
-      map(images => images.length === 0)
-    );
+    return this.getAllImages().pipe(map((images) => images.length === 0));
   }
 
+  // Upload a new image
   uploadImage(
     file: File,
     fileName: string,
-    title: string
+    title: string,
   ): Observable<BlogImage> {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', fileName);
     formData.append('title', title);
-
     return this.http.post<BlogImage>(
       `${environment.apiBaseUrl}/api/Images`,
-      formData
+      formData,
     );
   }
 
+  // Select an image and emit the selected image
   selectImage(image: BlogImage): void {
     this.selectedImage.next(image);
   }
 
+  // Listen for the selected image
   onSelectImage(): Observable<BlogImage> {
     return this.selectedImage.asObservable();
   }
 
+  // Delete an uploaded image by its ID
   deleteUploadedImage(id: string): Observable<BlogImage> {
     return this.http.delete<BlogImage>(
-      `${environment.apiBaseUrl}/api/Images/${id}?addAuth=true`
+      `${environment.apiBaseUrl}/api/Images/${id}?addAuth=true`,
     );
   }
 }

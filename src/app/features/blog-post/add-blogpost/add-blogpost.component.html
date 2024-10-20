@@ -4,7 +4,7 @@
 
   <!-- Form for blog infos with Angular's two-way binding, submitting on ngSubmit -->
   <form #form="ngForm" (ngSubmit)="onFormSubmit()" name="blogEntries">
-    <div class="mt-2 mb-5">
+    <div class="mb-5 mt-2">
       <!-- Title input field, binds to 'model.title' -->
       <div class="mt-3">
         <label for="title" class="form-label">Title</label>
@@ -60,6 +60,7 @@
           <button
             type="button"
             class="btn btn-secondary"
+            name="selectImageButton"
             data-bs-toggle="modal"
             data-bs-target="#selectModal"
           >
@@ -68,17 +69,21 @@
         </div>
 
         <!-- Display the selected image if URL is not empty -->
-        @if(model.featuredImageUrl != '') {
-        <div>
-          <img [src]="model.featuredImageUrl" height="100" class="ms-1 mt-2 rounded-2" />
-        </div>
+        @if (model.featuredImageUrl != '') {
+          <div>
+            <img
+              [src]="model.featuredImageUrl"
+              height="100"
+              class="rounded-2 ms-1 mt-2"
+            />
+          </div>
         }
       </div>
 
-       <!-- Content editor with live markdown preview -->
-       <div class="mt-4 card">
+      <!-- Content editor with live markdown preview -->
+      <div class="card mt-4">
         <div class="card-header">Content</div>
-        <div class="d-flex flex-row card-body">
+        <div class="d-flex card-body flex-row">
           <!-- Textarea for editing blog content -->
           <div class="col-6 p-2">
             <textarea
@@ -91,7 +96,7 @@
           </div>
           <!-- Live markdown preview of the blog content -->
           <div
-            class="col-6 p-2 scroll scroll--simple"
+            class="col-6 scroll scroll--simple p-2"
             style="max-height: 350px; overflow: auto"
           >
             <markdown [data]="model.content"></markdown>
@@ -107,8 +112,8 @@
           id="publishedDate"
           name="publishedDate"
           class="form-control"
-          [value]="model.publishedDate | date : 'yyyy-MM-dd'"
-          [ngModel]="model.publishedDate | date : 'yyyy-MM-dd'"
+          [value]="model.publishedDate | date: 'yyyy-MM-dd'"
+          [ngModel]="model.publishedDate | date: 'yyyy-MM-dd'"
           (ngModelChange)="model.publishedDate = $event"
         />
       </div>
@@ -139,27 +144,29 @@
 
       <!-- Categories selection dropdown (allows multiple selections) -->
       <div class="mt-3">
-        @if(categories$ | async; as categories) {
-        <label for="categories" class="form-label">Categories</label>
-        <select
-          class="form-control scroll scroll--simple"
-          [(ngModel)]="model.categories"
-          id="categories"
-          name="categories"
-          multiple
-          style="height: 70px; overflow: auto"
-        >
-          <!-- Loop through categories to create options -->
-          @for(category of categories; track category) {
-          <option [value]="category.id">{{ category.name }}</option>
-          }
-        </select>
+        @if (categories$ | async; as categories) {
+          <label for="categories" class="form-label">Categories</label>
+          <select
+            class="form-control scroll scroll--simple"
+            [(ngModel)]="model.categories"
+            id="categories"
+            name="categories"
+            multiple
+            style="height: 70px; overflow: auto"
+          >
+            <!-- Loop through categories to create options -->
+            @for (category of categories; track category) {
+              <option [value]="category.id">{{ category.name }}</option>
+            }
+          </select>
         }
       </div>
 
       <!-- Button to submit the form -->
       <div class="mt-3">
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success" name="saveButton">
+          Save
+        </button>
       </div>
     </div>
   </form>

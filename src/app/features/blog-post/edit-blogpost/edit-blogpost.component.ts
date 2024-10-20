@@ -28,33 +28,33 @@ import { ImageService } from '../shared/components/services/image.service';
   ],
 })
 export class EditBlogpostComponent implements OnInit, OnDestroy {
-  id: string | null = null;
-  model?: BlogPost;
-  categories$?: Observable<Category[]>;
-  selectedCategories?: string[];
-
-  routeSubscribtion$?: Subscription;
-  getBlogPostSubscribtion$?: Subscription;
-  updateBlogPostSubscription$?: Subscription;
-  deleteBlogPostSubscription$?: Subscription;
-  imageSelectSubscription$?: Subscription;
+  id: string | null = null; // ID of the blog post to be edited
+  model?: BlogPost; // Model for the blog post data
+  categories$?: Observable<Category[]>; // Observable for the list of categories
+  selectedCategories?: string[]; // Array to hold selected categories IDs
+  routeSubscribtion$?: Subscription; // Subscription for route parameters
+  getBlogPostSubscribtion$?: Subscription; // Subscription for getting the blog post
+  updateBlogPostSubscription$?: Subscription; // Subscription for updating the blog post
+  deleteBlogPostSubscription$?: Subscription; // Subscription for deleting the blog post
+  imageSelectSubscription$?: Subscription; // Subscription for image selection
 
   constructor(
-    private route: ActivatedRoute,
-    private blogPostService: BlogPostService,
-    private categoryService: CategoryService,
-    private imageService: ImageService,
-    private router: Router
+    private route: ActivatedRoute, // Inject ActivatedRoute to access route parameters
+    private blogPostService: BlogPostService, // Inject BlogPostService for blog post operations
+    private categoryService: CategoryService, // Inject CategoryService for category operations
+    private imageService: ImageService, // Inject ImageService for image operations
+    private router: Router, // Inject Router for navigation
   ) {}
 
   ngOnInit(): void {
+    // Get the list of categories
     this.categories$ = this.categoryService.getAllCategories();
 
+    // Subscribe to route parameters to get the blog post ID
     this.routeSubscribtion$ = this.route.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
-
-        // Get BlogPost from API
+        // Get the blog post from the API
         if (this.id) {
           this.getBlogPostSubscribtion$ = this.blogPostService
             .getBlogPostById(this.id)
@@ -66,6 +66,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
             });
         }
 
+        // Subscribe to image selector to get the selected image URL
         this.imageSelectSubscription$ = this.imageService
           .onSelectImage()
           .subscribe({
@@ -79,8 +80,9 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Handle form submission to update the blog post
   onFormSubmit(): void {
-    // Convert this model to Request Object
+    // Convert this model to UpdateBlogPost request object
     if (this.model && this.id) {
       var updateBlogPost: UpdateBlogPost = {
         author: this.model.author,
@@ -93,30 +95,30 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         urlHandle: this.model.urlHandle,
         categories: this.selectedCategories ?? [],
       };
-
       this.updateBlogPostSubscription$ = this.blogPostService
         .updateBlogPost(this.id, updateBlogPost)
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/admin/blogposts');
+            this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
           },
         });
     }
   }
 
+  // Handle deletion of the blog post
   onDelete(): void {
     if (this.id) {
-      // Call service and delete blogpost
       this.deleteBlogPostSubscription$ = this.blogPostService
         .deleteBlogPost(this.id)
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/admin/blogposts');
+            this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
           },
         });
     }
   }
 
+  // Unsubscribe from subscriptions to prevent memory leaks
   ngOnDestroy(): void {
     this.routeSubscribtion$?.unsubscribe();
     this.getBlogPostSubscribtion$?.unsubscribe();

@@ -16,7 +16,7 @@ import { ImageService } from '../shared/components/services/image.service';
   selector: 'app-add-blogpost',
   standalone: true,
   templateUrl: './add-blogpost.component.html',
-  styleUrl: './add-blogpost.component.css',
+  styleUrls: ['./add-blogpost.component.css'],
   imports: [
     FormsModule,
     DatePipe,
@@ -26,18 +26,17 @@ import { ImageService } from '../shared/components/services/image.service';
   ],
 })
 export class AddBlogpostComponent implements OnInit, OnDestroy {
-  model: AddBlogPost;
-  categories$?: Observable<Category[]>;
-
-  imageSelectorSubscription?: Subscription;
-
+  model: AddBlogPost; // Model for the blog post data
+  categories$?: Observable<Category[]>; // Observable for the list of categories
+  imageSelectorSubscription?: Subscription; // Subscription for the image selector
 
   constructor(
-    private blogpostService: BlogPostService,
-    private categoryService: CategoryService,
-    private imageService: ImageService,
-    private router: Router
+    private blogpostService: BlogPostService, // Inject BlogPostService for blog post operations
+    private categoryService: CategoryService, // Inject CategoryService for category operations
+    private imageService: ImageService, // Inject ImageService for image operations
+    private router: Router, // Inject Router for navigation
   ) {
+    // Initialize the model with default values
     this.model = {
       title: '',
       shortDescription: '',
@@ -52,8 +51,10 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Get the list of categories
     this.categories$ = this.categoryService.getAllCategories();
 
+    // Subscribe to the image selector to get the selected image URL
     this.imageSelectorSubscription = this.imageService
       .onSelectImage()
       .subscribe({
@@ -62,14 +63,16 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
       });
   }
 
+  // Handle form submission to create a new blog post
   onFormSubmit(): void {
     this.blogpostService.createBlogPost(this.model).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/admin/blogposts');
+        this.router.navigateByUrl('/admin/blogposts'); // Redirect to the blog posts admin page on success
       },
     });
   }
 
+  // Unsubscribe from the image selector to prevent memory leaks
   ngOnDestroy(): void {
     this.imageSelectorSubscription?.unsubscribe();
   }

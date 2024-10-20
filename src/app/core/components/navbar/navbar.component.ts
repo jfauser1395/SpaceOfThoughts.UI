@@ -14,63 +14,64 @@ import { BlogPostService } from '../../../features/blog-post/services/blog-post.
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  user?: User;
-  userName: string = '';
-  isSmallScreen = false;
-  isMediumScreen = false;
-  searchExpanded = false;
-  navBarExpanded = false;
-  private userSubscription?: Subscription;
-  blogPostService = inject(BlogPostService); // to be able to call it directly in html
+  user?: User; // Holds the current user information
+  userName: string = ''; // Stores the username derived from the user's email
+  isSmallScreen = false; // Flag to check if the screen size is small
+  isMediumScreen = false; // Flag to check if the screen size is medium
+  searchExpanded = false; // Flag to check if the search bar is expanded
+  navBarExpanded = false; // Flag to check if the navbar is expanded
+  private userSubscription?: Subscription; // Subscription for user authentication changes
+  blogPostService = inject(BlogPostService); // Inject BlogPostService to be used in the HTML
 
-  @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('searchInput') searchInput!: ElementRef; // Reference to the search input element
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
+    private authService: AuthService, // Inject AuthService for authentication
+    private router: Router, // Inject Router for navigation
   ) {}
 
   ngOnInit(): void {
+    // Subscribe to user authentication changes
     this.userSubscription = this.authService.user().subscribe({
       next: (response) => {
         this.user = response;
         if (this.user) {
-          this.userName = this.user.email.split('@')[0];
+          this.userName = this.user.email.split('@')[0]; // Extract username from email
         }
       },
     });
 
+    // Get the currently authenticated user
     this.user = this.authService.getUser();
+
+    // Check the screen size
     this.checkScreenSize();
   }
 
-
+  // Log out the user and navigate to the home page
   onLogout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/');
   }
 
-  // Check screen size
+  // Check screen size to set flags for responsive behavior
   checkScreenSize() {
     const width = window.innerWidth;
     this.isSmallScreen = width < 576;
     this.isMediumScreen = width < 992;
   }
 
-  // Monitor navbar toggle
+  // Monitor the navbar toggle state
   navToggled() {
     this.navBarExpanded = !this.navBarExpanded;
   }
 
+  // Toggle the search bar state and handle navbar collapse if necessary
   toggleSearchBar(query: string) {
-    if (this.searchExpanded == false) {
-      this.searchExpanded = true;
-    } else {
-      this.searchExpanded = false;
-    }
+    this.searchExpanded = !this.searchExpanded;
 
-    // If the searchbar is toggled the navbar is closed
-    if(this.navBarExpanded) {
+    // If the search bar is expanded, collapse the navbar
+    if (this.navBarExpanded) {
       const navbarToggler = document.querySelector('.navbar-toggler');
       if (navbarToggler) {
         navbarToggler.classList.toggle('collapsed');
@@ -82,16 +83,17 @@ export class NavbarComponent implements OnInit {
       this.navBarExpanded = false;
     }
 
-    this.blogPostService.navSort.next(query)
+    this.blogPostService.navSort.next(query); // Trigger the search with the query
   }
 
+  // Collapse the search bar and clear the search input
   collapseSearch(query: string) {
     this.searchExpanded = false;
     this.searchInput.nativeElement.value = '';
-
-    this.blogPostService.navSort.next(query)
+    this.blogPostService.navSort.next(query); // Trigger the search with the query
   }
 
+  // Unsubscribe form subscriptions to prevent memory leaks
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
   }

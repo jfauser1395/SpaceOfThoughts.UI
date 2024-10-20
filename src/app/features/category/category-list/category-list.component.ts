@@ -13,89 +13,90 @@ import { CommonModule } from '@angular/common';
   styleUrl: './category-list.component.css',
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
-  categories$?: Observable<Category[]>;
-  categoryQuant$?: Subscription;
-  totalCount!: number;
-  list: number[] = [];
-  pageNumber = 1;
-  pageSize = 4;
+  categories$?: Observable<Category[]>; // Observable for the list of categories
+  categoryQuant$?: Subscription; // Subscription for getting the total category count
+  totalCount!: number; // Total number of categories
+  list: number[] = []; // Array for pagination
+  pageNumber = 1; // Current page number
+  pageSize = 4; // Number of categories per page
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    // get total category count
+    // Get the total category count
     this.categoryQuant$ = this.categoryService.getCategoryCount().subscribe({
       next: (value) => {
         this.totalCount = value;
-
         this.list = new Array(Math.ceil(value / this.pageSize));
-
-        // get all categories
+        // Get all categories from the API
         this.categories$ = this.categoryService.getAllCategories(
           undefined,
           undefined,
           undefined,
           this.pageNumber,
-          this.pageSize
+          this.pageSize,
         );
       },
     });
   }
 
+  // Search for categories by query
   onSearch(query: string) {
     this.categories$ = this.categoryService.getAllCategories(query);
   }
 
+  // Sort the category list
   sort(sortBy: string, sortDirection: string) {
     this.categories$ = this.categoryService.getAllCategories(
       undefined,
       sortBy,
-      sortDirection
+      sortDirection,
     );
   }
 
+  // Get a specific page of categories
   getPage(pageNumber: number) {
     this.pageNumber = pageNumber;
-
     this.categories$ = this.categoryService.getAllCategories(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
 
+  // Get the next page of categories
   getNextPage() {
     if (this.pageNumber + 1 > this.list.length) {
       return;
     }
-
     this.pageNumber += 1;
     this.categories$ = this.categoryService.getAllCategories(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
 
+  // Get the previous page of categories
   getPrevPage() {
     if (this.pageNumber - 1 < 1) {
       return;
     }
-
     this.pageNumber -= 1;
     this.categories$ = this.categoryService.getAllCategories(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
 
+  // Unsubscribe from subscriptions to prevent memory leaks
   ngOnDestroy(): void {
     this.categoryQuant$?.unsubscribe();
   }

@@ -7,17 +7,20 @@
         class="btn-close"
         data-bs-dismiss="modal"
         aria-label="Close"
+        name="closeModalButton"
       ></button>
     </div>
+
+    <!-- Modal body with upload form and image selection section -->
     <div class="modal-body">
       <h4>Upload Image</h4>
-
       <form
         novalidate
         [formGroup]="form"
         (ngSubmit)="uploadImage()"
         name="imageForm"
       >
+        <!-- File input field for uploading image -->
         <div class="mt-3">
           <input
             type="file"
@@ -26,8 +29,11 @@
             (change)="onFileUploadChange($event)"
             name="file"
             formControlName="file"
+            aria-label="File input for uploading image"
           />
         </div>
+
+        <!-- Input field for file name -->
         <div class="mt-3">
           <input
             type="text"
@@ -35,8 +41,11 @@
             placeholder="File Name"
             name="fileName"
             formControlName="fileName"
+            aria-label="Input for file name"
           />
         </div>
+
+        <!-- Input field for image title -->
         <div class="mt-3">
           <input
             type="text"
@@ -44,13 +53,17 @@
             placeholder="Title"
             name="title"
             formControlName="title"
+            aria-label="Input for image title"
           />
         </div>
+
+        <!-- Submit button for uploading image -->
         <button
           type="submit"
           class="btn btn-success form-control mt-3"
           data-bs-dismiss="modal"
           aria-label="Close"
+          name="uploadButton"
           [disabled]="!form.valid"
         >
           Upload
@@ -58,9 +71,10 @@
       </form>
     </div>
 
+    <!-- Section to choose from uploaded images if there are any -->
     @if (!noImages) {
       <div class="container-fluid mt-3 p-3">
-        <h5>or chose an uploaded image:</h5>
+        <h5>or choose an uploaded image:</h5>
         <div
           class="scroll scroll--simple pictureWindow bg-dark-subtle rounded-3"
         >
@@ -70,22 +84,37 @@
                 <div
                   class="imgStyle rounded-3 border-1 border-light-subtle mb-4 me-3 mt-3"
                 >
+                  <!-- Display uploaded image -->
                   <img
                     [src]="image.url"
                     [title]="image.title"
                     class="custom-image rounded-3 mt-3"
+                    aria-label="Uploaded image"
                   />
+
+                  <!-- Image title and action buttons -->
                   <div class="mb-2 text-center">
                     <p class="fst-italic mt-3">{{ image.title }}</p>
+
+                    <!-- Button to select the image -->
                     <button
                       class="btn btn-secondary me-2"
                       data-bs-dismiss="modal"
                       (click)="selectImage(image)"
+                      name="selectImageButton"
+                      aria-label="Select image button"
                     >
-                      choose
+                      Choose
                     </button>
-                    <button class="btn btn-danger" (click)="deleteImage(image)">
-                      delete
+
+                    <!-- Button to delete the image -->
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteImage(image)"
+                      name="deleteImageButton"
+                      aria-label="Delete image button"
+                    >
+                      Delete
                     </button>
                   </div>
                 </div>

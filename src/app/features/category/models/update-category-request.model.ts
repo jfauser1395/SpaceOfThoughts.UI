@@ -1,4 +1,5 @@
+// Interface for updating an existing category
 export interface UpdateCategoryRequest {
-  name: string;
-  urlHandle: string;
+  name: string; // Name of the category
+  urlHandle: string; // URL handle (slug) for the category
 }

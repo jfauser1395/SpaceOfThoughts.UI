@@ -16,29 +16,31 @@ import { StyleService } from '../../../../services/style.service';
   styleUrl: './blog-details.component.css',
 })
 export class BlogDetailsComponent implements OnInit {
-  url: string | null = null;
-  blogPost$?: Observable<BlogPost>;
-  isUp = false;
+  url: string | null = null; // URL handle of the blog post
+  blogPost$?: Observable<BlogPost>; // Observable for the blog post
+  isUp = false; // Flag to indicate if the view is scrolled up
 
   constructor(
-    private route: ActivatedRoute,
-    private blogPostService: BlogPostService,
+    private route: ActivatedRoute, // Inject ActivatedRoute to access route parameters
+    private blogPostService: BlogPostService, // Inject BlogPostService for blog post operations
   ) {}
 
   ngOnInit(): void {
+    // Scroll to the top of the page smoothly on component initialization
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     });
 
+    // Subscribe to route parameters to get the URL handle of the blog post
     this.route.paramMap.subscribe({
       next: (params) => {
         this.url = params.get('url');
       },
     });
 
-    // Fetch blog details by url
+    // Fetch blog details by URL handle if the URL is available
     if (this.url) {
       this.blogPost$ = this.blogPostService.getBlogPostByUrlHandle(this.url);
     }

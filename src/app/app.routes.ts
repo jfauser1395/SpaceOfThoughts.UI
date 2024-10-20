@@ -16,54 +16,54 @@ import { userAuthGuard } from './features/auth/guards/user-auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    component: PublicBlogSummeryComponent,
+    component: PublicBlogSummeryComponent, // Route for public blog summary
   },
   {
     path: 'create-account',
-    component: CreateAccountComponent,
+    component: CreateAccountComponent, // Route for creating a new account
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent, // Route for user login
   },
   {
     path: 'blog/:url',
-    component: BlogDetailsComponent,
-    canActivate: [userAuthGuard],
+    component: BlogDetailsComponent, // Route for viewing blog details
+    canActivate: [userAuthGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/categories',
-    component: CategoryListComponent,
-    canActivate: [authGuard],
+    component: CategoryListComponent, // Route for listing categories in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/categories/add',
-    component: AddCategoryComponent,
-    canActivate: [authGuard],
+    component: AddCategoryComponent, // Route for adding a new category in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/categories/:id',
-    component: EditCategoryComponent,
-    canActivate: [authGuard],
+    component: EditCategoryComponent, // Route for editing a category in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/blogposts',
-    component: BlogpostListComponent,
-    canActivate: [authGuard],
+    component: BlogpostListComponent, // Route for listing blog posts in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/blogposts/add',
-    component: AddBlogpostComponent,
-    canActivate: [authGuard],
+    component: AddBlogpostComponent, // Route for adding a new blog post in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/blogposts/:id',
-    component: EditBlogpostComponent,
-    canActivate: [authGuard],
+    component: EditBlogpostComponent, // Route for editing a blog post in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
   {
     path: 'admin/users',
-    component: UserListComponent,
-    canActivate: [authGuard],
+    component: UserListComponent, // Route for listing users in admin
+    canActivate: [authGuard], // Guard to check if user is authorized
   },
 ];

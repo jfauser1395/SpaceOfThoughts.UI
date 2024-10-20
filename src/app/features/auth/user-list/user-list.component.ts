@@ -9,112 +9,115 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css',
+  styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  users$?: Observable<User[]>;
-  id: string | null = null;
-  deleteUserSubscription$?: Subscription;
-  usersQuant$?: Subscription;
-  totalCount!: number;
-  list: number[] = [];
-  pageNumber = 1;
-  pageSize = 5;
-  sortedBy: string;
-  sortDirection: string;
+  users$?: Observable<User[]>; // Observable for the list of users
+  id: string | null = null; // ID of the selected user for deletion
+  deleteUserSubscription$?: Subscription; // Subscription for delete user request
+  usersQuant$?: Subscription; // Subscription for getting total user count
+  totalCount!: number; // Total number of users
+  list: number[] = []; // Array for pagination
+  pageNumber = 1; // Current page number
+  pageSize = 5; // Number of users per page
+  sortedBy: string; // Field to sort by
+  sortDirection: string; // Direction of sorting
 
   constructor(private authService: AuthService) {
-    this.sortedBy = 'userName';
-    this.sortDirection = 'asc';
+    this.sortedBy = 'userName'; // Default sorting by username
+    this.sortDirection = 'asc'; // Default sorting direction
   }
 
   ngOnInit(): void {
-    // get total user count
+    // Get the total user count
     this.usersQuant$ = this.authService.getUserCount().subscribe({
       next: (value) => {
         this.totalCount = value;
-
         this.list = new Array(Math.ceil(value / this.pageSize));
-
-        // get all users from the API
+        // Get all users from the API
         this.users$ = this.authService.getAllUsersFromDatabase(
           undefined,
           this.sortedBy,
-          this.sortDirection
+          this.sortDirection,
         );
       },
     });
   }
+
+  // Set the ID of the user to be deleted
   setUserId(userId: string) {
     this.id = userId;
   }
+
+  // Delete the selected user
   onDelete(): void {
     if (this.id) {
-      // Call service and delete a user
       this.deleteUserSubscription$ = this.authService
         .deleteUser(this.id)
         .subscribe({
           next: (response) => {
-            this.ngOnInit();
+            this.ngOnInit(); // Refresh the user list after deletion
           },
         });
     }
   }
 
+  // Search for users by query
   onSearch(query: string) {
     this.users$ = this.authService.getAllUsersFromDatabase(query);
   }
 
+  // Sort the user list
   sort(sortBy: string, sortDirection: string) {
     this.users$ = this.authService.getAllUsersFromDatabase(
       undefined,
       sortBy,
-      sortDirection
+      sortDirection,
     );
   }
 
+  // Get a specific page of users
   getPage(pageNumber: number) {
     this.pageNumber = pageNumber;
-
     this.users$ = this.authService.getAllUsersFromDatabase(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
 
+  // Get the next page of users
   getNextPage() {
     if (this.pageNumber + 1 > this.list.length) {
       return;
     }
-
     this.pageNumber += 1;
     this.users$ = this.authService.getAllUsersFromDatabase(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
 
+  // Get the previous page of users
   getPrevPage() {
     if (this.pageNumber - 1 < 1) {
       return;
     }
-
     this.pageNumber -= 1;
     this.users$ = this.authService.getAllUsersFromDatabase(
       undefined,
       undefined,
       undefined,
       this.pageNumber,
-      this.pageSize
+      this.pageSize,
     );
   }
-
+  // Unsubscribe form subscriptions to prevent memory leaks
   ngOnDestroy(): void {
     this.deleteUserSubscription$?.unsubscribe();
   }

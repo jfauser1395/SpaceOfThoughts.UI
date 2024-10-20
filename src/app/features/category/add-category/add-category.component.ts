@@ -11,32 +11,35 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule, AddCategoryComponent, RouterModule],
   templateUrl: './add-category.component.html',
-  styleUrl: './add-category.component.css',
+  styleUrls: ['./add-category.component.css'],
 })
 export class AddCategoryComponent implements OnDestroy {
-  model: AddCategoryRequest;
-  private addCategorySubscription?: Subscription;
+  model: AddCategoryRequest; // Model for the add category request
+  private addCategorySubscription?: Subscription; // Subscription for the add category request
 
   constructor(
-    private categoryService: CategoryService,
-    private router: Router
+    private categoryService: CategoryService, // Inject CategoryService for category operations
+    private router: Router, // Inject Router for navigation
   ) {
+    // Initialize the model with default values
     this.model = {
       name: '',
       urlHandle: '',
     };
   }
 
+  // Handle form submission to add a new category
   onFormSubmit() {
     this.addCategorySubscription = this.categoryService
       .addCategory(this.model)
       .subscribe({
         next: (response) => {
-          this.router.navigateByUrl('admin/categories');
+          this.router.navigateByUrl('admin/categories'); // Redirect to the categories admin page on success
         },
       });
   }
 
+  // Unsubscribe from the add category request to prevent memory leaks
   ngOnDestroy(): void {
     this.addCategorySubscription?.unsubscribe();
   }
