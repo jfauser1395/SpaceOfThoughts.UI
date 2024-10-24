@@ -1,4 +1,4 @@
-<div class="container mt-4 p-2">
+<div class="container p-4">
   <h1>Edit BlogPost</h1>
 
   <!-- Ensure 'model' exists before rendering the form -->
@@ -69,7 +69,7 @@
           </div>
 
           <!-- Display the selected image if URL is not empty -->
-          @if (model.featuredImageUrl != '') {
+          @if (model.featuredImageUrl != "") {
             <div>
               <img
                 [src]="model.featuredImageUrl"
@@ -183,8 +183,8 @@
           <div
             class="modal fade"
             id="staticBackdrop"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
+            data-bs-backdrop="true"
+            data-bs-keyboard="true"
             tabindex="-1"
             aria-labelledby="staticBackdropLabel"
             aria-hidden="true"
@@ -239,6 +239,8 @@
 <div
   class="modal fade"
   id="selectModal"
+  data-bs-backdrop="true"
+  data-bs-keyboard="true"
   tabindex="-1"
   aria-labelledby="selectModalLabel"
   aria-hidden="true"

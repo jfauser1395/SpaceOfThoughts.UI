@@ -100,7 +100,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
       this.updateBlogPostSubscription$ = this.blogPostService
         .updateBlogPost(this.id, updateBlogPost)
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
           },
         });
@@ -115,8 +115,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         .subscribe({
           next: () => {
             this.router.navigateByUrl('/admin/blogposts').then(() => {
-              // Scroll to the top of the page
-              this.viewportScroller.scrollToPosition([0, 0]); // Redirect to blog posts admin page on success and scroll up
+              this.viewportScroller.scrollToPosition([0, 0]); // Redirect and scroll up to blog posts admin page on success
             });
           },
         });

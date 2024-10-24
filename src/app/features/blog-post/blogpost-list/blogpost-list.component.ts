@@ -4,6 +4,7 @@ import { BlogPostService } from '../services/blog-post.service';
 import { Observable, Subscription } from 'rxjs';
 import { BlogPost } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blogpost-list',
@@ -20,7 +21,10 @@ export class BlogpostListComponent implements OnInit, OnDestroy {
   pageNumber = 1; // Current page number
   pageSize = 4; // Number of blog posts per page
 
-  constructor(private blogPostService: BlogPostService) {}
+  constructor(
+    private blogPostService: BlogPostService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     // Get the total blog post count
@@ -37,6 +41,20 @@ export class BlogpostListComponent implements OnInit, OnDestroy {
           this.pageSize,
         );
       },
+    });
+  }
+
+  // Navigate to the add blogpost page and reload
+  navigateToAddBlogPost() {
+    this.router.navigateByUrl('/admin/blogposts/add').then(() => {
+      window.location.reload();
+    });
+  }
+
+  // Navigate to the edit blogpost page and reload
+  navigateToEditBlogPost(blogpost: string) {
+    this.router.navigateByUrl(`/admin/blogposts/${blogpost}`).then(() => {
+      window.location.reload();
     });
   }
 

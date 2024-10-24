@@ -104,7 +104,7 @@
 
                 <!-- Blog post published date formatted to MM-DD-YY -->
                 <td class="text-center">
-                  {{ blogPost.publishedDate | date: 'MM-dd-yy' }}
+                  {{ blogPost.publishedDate | date: "MM-dd-yy" }}
                 </td>
 
                 <!-- Boolean value for visibility (isVisible) -->
@@ -128,7 +128,7 @@
                     <a
                       class="btn btn-secondary"
                       name="editButton"
-                      [routerLink]="['/admin/blogposts', blogPost.id]"
+                      (click)="navigateToEditBlogPost(blogPost.id)"
                       >Edit</a
                     >
                   </span>
@@ -146,7 +146,7 @@
         <button
           class="btn btn-primary mb-2 me-1"
           name="addBlogButton"
-          [routerLink]="['/admin/blogposts/add']"
+          (click)="navigateToAddBlogPost()"
         >
           Add BlogPost
         </button>

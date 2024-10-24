@@ -1,6 +1,6 @@
-<div class="container p-2">
-  <!-- Header for the Add BlogPost form -->
-  <h1 class="mt-3">Add BlogPost</h1>
+<div class="container p-4">
+
+  <h1>Add BlogPost</h1>
 
   <!-- Form for blog infos with Angular's two-way binding, submitting on ngSubmit -->
   <form #form="ngForm" (ngSubmit)="onFormSubmit()" name="blogEntries">
@@ -177,6 +177,8 @@
   class="modal fade"
   id="selectModal"
   tabindex="-1"
+  data-bs-backdrop="true"
+  data-bs-keyboard="true"
   aria-labelledby="selectModalLabel"
   aria-hidden="true"
 >

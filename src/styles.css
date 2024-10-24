@@ -29,37 +29,7 @@ input:-webkit-autofill + .inside-btn {
   background-color: transparent !important;
 }
 
-/*Loading Screen Icon*/
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Loading animation */
-.loadAnimation {
-  animation: pulse 2s infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 85vh;
-}
-
-@media (max-width: 320px) {
-  .loadAnimation img {
-    width: 100%;
-    height: auto;
-    margin-right: 10px;
-    margin-bottom: 50px;
-  }
-}
-
+/*########################################################################*/
 /* Icons*/
 .btnIcons {
   color: #d47e92;
@@ -92,6 +62,37 @@ input:-webkit-autofill + .inside-btn {
   background-color: #212529;
 }
 
+/*Loading Screen Icon*/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Loading animation */
+.loadAnimation {
+  animation: pulse 2s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+
+@media (max-width: 320px) {
+  .loadAnimation img {
+    width: 100%;
+    height: auto;
+    margin-right: 10px;
+    margin-bottom: 50px;
+  }
+}
+
 /*########################################################################*/
 /*Fonts*/
 @font-face {
@@ -122,7 +123,6 @@ input:-webkit-autofill + .inside-btn {
   font-size: 20px;
 }
 /*########################################################################*/
-
 /* Custom scrollbar */
 
 .scrollHight {
