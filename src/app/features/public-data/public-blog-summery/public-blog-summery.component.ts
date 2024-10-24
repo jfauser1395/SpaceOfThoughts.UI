@@ -24,7 +24,7 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
   sortDirection: string; // Direction of sorting
   navBarSearch$?: Subscription; // Subscription for navbar search functionality
   blogsEmptySubscribtion$?: Subscription; // Subscription for checking if there are blogs
-  noBlogs?: boolean; // Flag to indicate if there are no blogs
+  noBlogs: boolean = true;// Flag to indicate if there are no blogs
 
   constructor(
     private blogPostService: BlogPostService, // Inject BlogPostService for blog post operations
@@ -48,6 +48,13 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
       behavior: 'smooth',
     });
 
+    // Check if there are blogs in the database
+    this.blogsEmptySubscribtion$ = this.blogPostService
+    .checkIfImagesEmpty()
+    .subscribe((isEmpty) => {
+      this.noBlogs = isEmpty;
+    });
+
     // Get the current user to validate access rights for blog details and redirect to login page if not authenticated
     this.userSubscription$ = this.authService.user().subscribe({
       next: (response) => {
@@ -63,13 +70,6 @@ export class PublicBlogSummeryComponent implements OnInit, OnDestroy {
       this.sortedBy,
       this.sortDirection,
     );
-
-    // Check if there are blogs in the database
-    this.blogsEmptySubscribtion$ = this.blogPostService
-      .checkIfImagesEmpty()
-      .subscribe((isEmpty) => {
-        this.noBlogs = isEmpty;
-      });
   }
 
   // Search for blog posts by query

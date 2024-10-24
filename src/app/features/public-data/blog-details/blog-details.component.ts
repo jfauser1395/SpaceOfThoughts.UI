@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { StyleService } from '../../../../services/style.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog-details',
   standalone: true,
-  imports: [CommonModule, DatePipe, MarkdownComponent],
+  imports: [CommonModule, DatePipe, MarkdownComponent, RouterModule],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css',
 })
@@ -19,6 +20,7 @@ export class BlogDetailsComponent implements OnInit {
   url: string | null = null; // URL handle of the blog post
   blogPost$?: Observable<BlogPost>; // Observable for the blog post
   isUp = false; // Flag to indicate if the view is scrolled up
+  
 
   constructor(
     private route: ActivatedRoute, // Inject ActivatedRoute to access route parameters

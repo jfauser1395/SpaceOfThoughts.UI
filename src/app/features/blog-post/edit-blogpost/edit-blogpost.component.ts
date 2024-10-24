@@ -13,6 +13,7 @@ import { Category } from '../../category/models/category.model';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
 import { ImageSelectorComponent } from '../shared/components/image-selector/image-selector.component';
 import { ImageService } from '../shared/components/services/image.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -44,6 +45,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService, // Inject CategoryService for category operations
     private imageService: ImageService, // Inject ImageService for image operations
     private router: Router, // Inject Router for navigation
+    private viewportScroller: ViewportScroller, // Inject viewportScroller for scroll control
   ) {}
 
   ngOnInit(): void {
@@ -111,8 +113,11 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
       this.deleteBlogPostSubscription$ = this.blogPostService
         .deleteBlogPost(this.id)
         .subscribe({
-          next: (response) => {
-            this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
+          next: () => {
+            this.router.navigateByUrl('/admin/blogposts').then(() => {
+              // Scroll to the top of the page
+              this.viewportScroller.scrollToPosition([0, 0]); // Redirect to blog posts admin page on success and scroll up
+            });
           },
         });
     }

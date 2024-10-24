@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { User } from '../../../features/auth/models/user.model';
@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
   navBarExpanded = false; // Flag to check if the navbar is expanded
   private userSubscription?: Subscription; // Subscription for user authentication changes
   blogPostService = inject(BlogPostService); // Inject BlogPostService to be used in the HTML
-
   @ViewChild('searchInput') searchInput!: ElementRef; // Reference to the search input element
 
   constructor(
@@ -54,6 +53,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  // Check the screen size dynamically  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkScreenSize();
+  }
+  
   // Check screen size to set flags for responsive behavior
   checkScreenSize() {
     const width = window.innerWidth;
