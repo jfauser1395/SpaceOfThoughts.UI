@@ -1,7 +1,7 @@
 
 ### [:warning: Finish API setup first and return after :warning:](https://github.com/jfauser1395/SpaceOfThoughts.API)
 
-# SpaceOfThoughts.com
+# SpaceOfThoughts.UI
 
 ## Prerequisites
 
