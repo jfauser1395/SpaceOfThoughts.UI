@@ -5,6 +5,7 @@ import { CategoryService } from '../services/category.service';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-add-category',
@@ -20,6 +21,7 @@ export class AddCategoryComponent implements OnDestroy {
   constructor(
     private categoryService: CategoryService, // Inject CategoryService for category operations
     private router: Router, // Inject Router for navigation
+    private viewportScroller: ViewportScroller, // Inject viewportScroller for scroll control
   ) {
     // Initialize the model with default values
     this.model = {
@@ -34,7 +36,9 @@ export class AddCategoryComponent implements OnDestroy {
       .addCategory(this.model)
       .subscribe({
         next: (response) => {
-          this.router.navigateByUrl('admin/categories'); // Redirect to the categories admin page on success
+          this.router.navigateByUrl('admin/categories').then(() => {
+            this.viewportScroller.scrollToPosition([0, 0]); // Redirect to the categories admin page on success
+          });
         },
       });
   }

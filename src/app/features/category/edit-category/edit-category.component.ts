@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category.model';
 import { UpdateCategoryRequest } from '../models/update-category-request.model';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-edit-category',
@@ -23,6 +24,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute, // Inject ActivatedRoute to access route parameters
     private categoryService: CategoryService, // Inject CategoryService for category operations
     private router: Router, // Inject Router for navigation
+    private viewportScroller: ViewportScroller, // Inject viewportScroller for scroll control
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
         .updateCategory(this.id, updateCategoryRequest)
         .subscribe({
           next: (response) => {
-            this.router.navigateByUrl('/admin/categories'); // Redirect to categories admin page on success
+            this.router.navigateByUrl('/admin/categories').then(() => {
+              this.viewportScroller.scrollToPosition([0, 0]); // Redirect to the categories admin page on success
+            });
           },
         });
     }
