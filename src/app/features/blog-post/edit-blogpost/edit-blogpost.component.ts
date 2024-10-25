@@ -110,6 +110,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
           });
       }
     } else {
+      this.viewportScroller.scrollToPosition([0, 0]); // Scroll up
       this.urlHandleWarning =
         '*Please make sure to at lease fill out this field!'; // Warning massage to fill out the urlHandleField
     }
