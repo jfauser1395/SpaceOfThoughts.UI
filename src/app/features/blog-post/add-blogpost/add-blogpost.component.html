@@ -28,6 +28,10 @@
           [(ngModel)]="model.urlHandle"
         />
       </div>
+      <!-- Shows error massage if the Url handle field is not field out -->
+      <small class="text-danger justify-content-start mt-2">
+        {{ this.urlHandleWarning }}
+      </small>
 
       <!-- Short Description input field -->
       <div class="mt-3">

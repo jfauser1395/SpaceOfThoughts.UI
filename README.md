@@ -21,7 +21,19 @@ sudo npm install -g @angular/cli@18.2.2
 
 ## Start the application
 
-First make sure that you are running the API in another terminal as explained in the API *README* file. After cloning the UI repository navigate into the root directory and run `ng serve` to start the dev server. Navigate to `http://localhost:4200/` or Press `o + Enter` to open in the system's default browser.
+First make sure that you are running the API in another terminal as explained in the API *README* file. After cloning the UI repository navigate into the root directory and run:
+
+ ```sh 
+ npm install
+ ```
+to install all project dependency. 
+
+After that run: 
+
+```sh
+ng serve
+``` 
+to start the dev server. Navigate to `http://localhost:4200/` or Press `o + Enter` to open in the system's default browser.
 
 ## Login into the application
 

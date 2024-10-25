@@ -29,6 +29,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+     // Scroll to the top of the page smoothly on component initialization
+     window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    
     // Get the total user count
     this.usersQuant$ = this.authService.getUserCount().subscribe({
       next: (value) => {

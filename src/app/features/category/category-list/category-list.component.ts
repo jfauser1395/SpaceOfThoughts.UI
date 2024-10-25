@@ -23,6 +23,13 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
+     // Scroll to the top of the page smoothly on component initialization
+     window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    
     // Get the total category count
     this.categoryQuant$ = this.categoryService.getCategoryCount().subscribe({
       next: (value) => {

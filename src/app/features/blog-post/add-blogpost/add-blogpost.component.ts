@@ -29,6 +29,7 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
   model: AddBlogPost; // Model for the blog post data
   categories$?: Observable<Category[]>; // Observable for the list of categories
   imageSelectorSubscription?: Subscription; // Subscription for the image selector
+  urlHandleWarning?: string; // Url handle field warning 
 
   constructor(
     private blogpostService: BlogPostService, // Inject BlogPostService for blog post operations
@@ -65,11 +66,16 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
 
   // Handle form submission to create a new blog post
   onFormSubmit(): void {
-    this.blogpostService.createBlogPost(this.model).subscribe({
-      next: (response) => {
-        this.router.navigateByUrl('/admin/blogposts'); // Redirect to the blog posts admin page on success
-      },
-    });
+    if (this.model.urlHandle != '') {
+      this.blogpostService.createBlogPost(this.model).subscribe({
+        next: () => {
+          this.router.navigateByUrl('/admin/blogposts'); // Redirect to the blog posts admin page on success
+        },
+      });
+    } else {
+      this.urlHandleWarning =
+        '*Please make sure to at lease fill out this field!'; // Warning massage to fill out the urlHandleField
+    }
   }
 
   // Unsubscribe from the image selector to prevent memory leaks

@@ -27,6 +27,13 @@ export class BlogpostListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+     // Scroll to the top of the page smoothly on component initialization
+     window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+    
     // Get the total blog post count
     this.blogPostQuant$ = this.blogPostService.getBlogPostCount().subscribe({
       next: (value) => {

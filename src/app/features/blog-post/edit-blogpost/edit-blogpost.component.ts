@@ -38,6 +38,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   updateBlogPostSubscription$?: Subscription; // Subscription for updating the blog post
   deleteBlogPostSubscription$?: Subscription; // Subscription for deleting the blog post
   imageSelectSubscription$?: Subscription; // Subscription for image selection
+  urlHandleWarning?: string; // Url handle field warning
 
   constructor(
     private route: ActivatedRoute, // Inject ActivatedRoute to access route parameters
@@ -84,26 +85,31 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
 
   // Handle form submission to update the blog post
   onFormSubmit(): void {
-    // Convert this model to UpdateBlogPost request object
-    if (this.model && this.id) {
-      var updateBlogPost: UpdateBlogPost = {
-        author: this.model.author,
-        content: this.model.content,
-        shortDescription: this.model.shortDescription,
-        featuredImageUrl: this.model.featuredImageUrl,
-        isVisible: this.model.isVisible,
-        publishedDate: this.model.publishedDate,
-        title: this.model.title,
-        urlHandle: this.model.urlHandle,
-        categories: this.selectedCategories ?? [],
-      };
-      this.updateBlogPostSubscription$ = this.blogPostService
-        .updateBlogPost(this.id, updateBlogPost)
-        .subscribe({
-          next: () => {
-            this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
-          },
-        });
+    if (this.model?.urlHandle != '') {
+      // Convert this model to UpdateBlogPost request object
+      if (this.model && this.id) {
+        var updateBlogPost: UpdateBlogPost = {
+          author: this.model.author,
+          content: this.model.content,
+          shortDescription: this.model.shortDescription,
+          featuredImageUrl: this.model.featuredImageUrl,
+          isVisible: this.model.isVisible,
+          publishedDate: this.model.publishedDate,
+          title: this.model.title,
+          urlHandle: this.model.urlHandle,
+          categories: this.selectedCategories ?? [],
+        };
+        this.updateBlogPostSubscription$ = this.blogPostService
+          .updateBlogPost(this.id, updateBlogPost)
+          .subscribe({
+            next: () => {
+              this.router.navigateByUrl('/admin/blogposts'); // Redirect to blog posts admin page on success
+            },
+          });
+      }
+    } else {
+      this.urlHandleWarning =
+        '*Please make sure to at lease fill out this field!'; // Warning massage to fill out the urlHandleField
     }
   }
 
