@@ -1,5 +1,5 @@
 
-### [:warning: Make sure you have finished up the setup of the API before you continue with the UI installation :warning:](https://github.com/jfauser1395/SpaceOfThoughts.API)
+### [:warning: Finish API setup first and return after :warning:](https://github.com/jfauser1395/SpaceOfThoughts.API)
 
 # SpaceOfThoughts.com
 
@@ -21,5 +21,5 @@ sudo npm install -g @angular/cli@18.2.2
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` (press o + Enter to open in browser). 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` (press `o + Enter` to open in browser). 
 
