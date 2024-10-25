@@ -19,7 +19,7 @@ Please install the CLI:
 sudo npm install -g @angular/cli@18.2.2
 ```
 
-## Development server
+## Start the application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` (press `o + Enter` to open in browser). 
+After cloning the project navigate into the root directory and run `ng serve` to start the dev server. Navigate to `http://localhost:4200/` (press `o + Enter` to open in browser). 
 
