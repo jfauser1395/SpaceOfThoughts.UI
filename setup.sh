@@ -21,8 +21,8 @@ sudo apt install -y dotnet-sdk-8.0
 dotnet tool install --global dotnet-ef
 
 # Update PATH for the EF framework
-echo 'export PATH="$PATH:/home/$(whoami)/.dotnet/tools"' >> ~/.profile
-source ~/.profile
+export PATH="$PATH:/root/.dotnet/tools"
+
 
 # Setup the API
 cd SpaceOfThoughts.API/
