@@ -26,6 +26,9 @@ sleep 2
 
 # Update PATH for the EF framework
 echo 'export PATH="$PATH:/home/$(whoami)/.dotnet/tools"' >> ~/.profile
+
+sleep 2
+
 source ~/.profile
 
 # Setup the API
