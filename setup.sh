@@ -36,4 +36,4 @@ dotnet linux-dev-certs install
 sudo dotnet run &
 
 # Open a new terminal window to run npm install and ng serve
-gnome-terminal -- bash -c "cd ~/SpaceOfThoughts.UI/ && npm install && ng serve; exec bash"
+gnome-terminal -- bash -c "cd ~/SpaceOfThoughts.UI/ && npm install && yes | ng serve; exec bash"
