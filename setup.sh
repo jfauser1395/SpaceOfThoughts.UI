@@ -12,7 +12,7 @@ sudo npm install -g @angular/cli
 sudo apt install -y mysql-server
 
 # Setup the project's default database
-sudo mysql < ~SpaceOfThoughts.UI/InstallationScript/mysql_commands.sql
+sudo mysql < SpaceOfThoughts.UI/InstallationScript/mysql_commands.sql
 
 # Download and install .Net SDK
 sudo apt install -y dotnet-sdk-8.0
@@ -36,4 +36,4 @@ dotnet linux-dev-certs install
 sudo dotnet run &
 
 # Open a new terminal window to run npm install and ng serve
-gnome-terminal -- bash -c "cd SpaceOfThoughts.UI/ && npm install && ng serve; exec bash"
+gnome-terminal -- bash -c "cd ~/SpaceOfThoughts.UI/ && npm install && ng serve; exec bash"
