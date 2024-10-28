@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Download the API Repo
 git clone https://github.com/jfauser1395/SpaceOfThoughts.API.git
 
@@ -27,7 +29,7 @@ sleep 2
 # Update PATH for the EF framework
 echo 'export PATH="$PATH:/home/$(whoami)/.dotnet/tools"' >> ~/.profile
 
-sleep 2
+sleep 6
 
 source ~/.profile
 
