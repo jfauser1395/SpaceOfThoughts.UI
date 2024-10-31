@@ -2,19 +2,19 @@
   <div class="card bg-gradient container mt-5">
     <h1 class="mt-4">Users List</h1>
 
-    <!-- Search bar section to find a specific blog post by category -->
+    <!-- Search bar section to find a specific user -->
     <div class="container mt-5">
       <div class="col-md">
         <div class="custom-input-group">
-          <!-- Input field for category search; triggers search on 'Enter' or button click -->
+          <!-- Input field for user search; triggers search on 'Enter' or button click -->
           <input
             type="text"
             id="searchField"
             name="searchField"
             class="form-control"
             (keyup.enter)="onSearch(queryText.value)"
-            placeholder="Find category"
-            aria-label="Find category"
+            placeholder="Find user"
+            aria-label="Find user"
             aria-describedby="basic-addon1"
             #queryText
           />

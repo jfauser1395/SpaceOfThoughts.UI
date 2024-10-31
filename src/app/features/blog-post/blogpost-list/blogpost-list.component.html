@@ -2,18 +2,18 @@
   <div class="card bg-gradient container mt-5">
     <h1 class="ms-1 mt-4">Blog Post List</h1>
 
-    <!-- Search bar section to find a specific blog post by category -->
+    <!-- Search bar section to find a specific blog post -->
     <div class="container mt-5">
       <div class="col-md">
         <div class="custom-input-group">
-          <!-- Input field for category search; triggers search on 'Enter' or button click -->
+          <!-- Input field for blog search; triggers search on 'Enter' or button click -->
           <input
             type="text"
             id="fearchField"
             class="form-control"
             (keyup.enter)="onSearch(queryText.value)"
-            placeholder="Find category"
-            aria-label="Find category"
+            placeholder="Find blog"
+            aria-label="Find blog"
             aria-describedby="basic-addon1"
             #queryText
           />
