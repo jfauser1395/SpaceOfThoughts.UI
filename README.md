@@ -16,7 +16,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Please install the CLI:
 
 ```sh
-sudo npm install -g @angular/cli@18.2.2
+sudo npm install -g @angular/cli
 ```
 
 ## Start the application
