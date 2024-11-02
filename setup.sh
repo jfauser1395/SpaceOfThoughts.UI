@@ -31,14 +31,25 @@ echo 'export PATH="$PATH:/home/$(whoami)/.dotnet/tools"' >> ~/.profile
 source ~/.profile
 
 # Setup the API
+
+# Database migration
 cd SpaceOfThoughts.API/
 sudo rm -rf Migrations/*
 dotnet ef migrations add InitialCreate --context ApplicationDbContext
 dotnet ef migrations add InitialCreateAuth --context AuthDbContext
 dotnet ef database update --context ApplicationDbContext
 dotnet ef database update --context AuthDbContext
-dotnet tool update -g linux-dev-certs
-dotnet linux-dev-certs install 
+
+# Install self signed certificate
+sudo apt install libnss3-tools
+mkdir -p $HOME/.pki/nssdb
+dotnet dev-certs https
+sudo -E dotnet dev-certs https -ep /usr/local/share/ca-certificates/aspnet-dev-$(whoami).crt --format PEM
+sudo chmod 644 /usr/local/share/ca-certificates/aspnet-dev-$(whoami).crt
+certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n localhost -i /usr/local/share/ca-certificates/aspnet-dev-$(whoami).crt
+sudo update-ca-certificates
+
+# Run the API
 dotnet run &
 
 # Open a new terminal window to run npm install and ng serve
