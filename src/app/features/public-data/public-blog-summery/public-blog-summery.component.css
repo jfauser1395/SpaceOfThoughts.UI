@@ -10,3 +10,21 @@
   border: 0px;
 }
 
+/* Make button more visible when touched on a small screen */
+.btn {
+  position: relative;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+}
+.btn:active {
+  background-color: #a66776;;
+  box-shadow: 0 5px white;
+  transform: translateY(4px);
+}

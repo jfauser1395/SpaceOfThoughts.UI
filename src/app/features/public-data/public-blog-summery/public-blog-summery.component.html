@@ -54,7 +54,7 @@
                       @if (user === undefined) {
                         <a
                           [routerLink]="['/login']"
-                          class="btn btn btn-outline-dark blogFontTheme btnPrimary"
+                          class="btn btn btn-outline-dark blogFontTheme btnPrimary active"
                           aria-label="Read more link"
                         >
                           Read blog
@@ -63,7 +63,7 @@
                       } @else {
                         <a
                           [routerLink]="['/blog', blog.urlHandle]"
-                          class="btn btn btn-outline-dark blogFontTheme btnPrimary"
+                          class="btn btn btn-outline-light blogFontTheme btnPrimary active"
                           aria-label="Read more link"
                         >
                           Read blog
