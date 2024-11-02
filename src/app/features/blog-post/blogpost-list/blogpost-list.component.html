@@ -148,10 +148,9 @@
           name="addBlogButton"
           (click)="navigateToAddBlogPost()"
         >
-          Add BlogPost
+          Add blog
         </button>
       </div>
-
       <!-- Conditional pagination (shown if total count is greater than 5) -->
       @if (this.totalCount >= 5) {
         <div class="flex-colmn align-item-end">
@@ -165,7 +164,7 @@
                   (click)="getPrevPage()"
                   name="previousButton"
                 >
-                  Previous
+                <i class="bi bi-caret-left"></i>
                 </button>
               </li>
 
@@ -191,7 +190,7 @@
                   (click)="getNextPage()"
                   name="nextButton"
                 >
-                  Next
+                <i class="bi bi-caret-right"></i>
                 </button>
               </li>
             </ul>
