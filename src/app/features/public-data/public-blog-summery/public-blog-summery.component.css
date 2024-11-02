@@ -1,0 +1,12 @@
+/* Card background */
+.cardBackground {
+  background: #17191d;
+}
+
+/* Override button styling */
+.btnPrimary {
+  background: #17191d;
+  color: #d5dfe9;
+  border: 0px;
+}
+

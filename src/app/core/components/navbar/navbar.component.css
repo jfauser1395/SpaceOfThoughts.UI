@@ -1,3 +1,13 @@
+/* Override button styling */
+.btnPrimary {
+  background: #212529;
+  color: #d5dfe9;
+  border: 0px;
+  white-space: nowrap; /* To prevent the text from breaking into a new line */
+}
+.blogFontTheme{
+  white-space: nowrap; /* To prevent the text from breaking into a new line */
+}
 /* Search icon styling */
 .searchIconAnimation {
   position: absolute;

@@ -11,7 +11,7 @@
             @if (blog.isVisible) {
               <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-3 d-flex mb-2 p-2">
                 <!-- Blog post card -->
-                <div class="card d-flex">
+                <div class="card d-flex cardBackground w-100">
                   <!-- Blog post featured image -->
                   <img
                     [src]="blog.featuredImageUrl"
@@ -50,22 +50,24 @@
                       {{ blog.shortDescription }}
                     </p>
                     <!-- Read more link -->
-                    <span class="d-flex justify-content-end mt-auto">
+                    <span class="d-flex justify-content-center mt-auto">
                       @if (user === undefined) {
                         <a
                           [routerLink]="['/login']"
-                          class="btn btn-dark btnPrimary"
+                          class="btn btn btn-outline-dark blogFontTheme btnPrimary"
                           aria-label="Read more link"
                         >
-                          Read More
+                          Read blog
+                          <i class="bi bi-arrow-right"></i>
                         </a>
                       } @else {
                         <a
                           [routerLink]="['/blog', blog.urlHandle]"
-                          class="btn btn-dark btnPrimary"
+                          class="btn btn btn-outline-dark blogFontTheme btnPrimary"
                           aria-label="Read more link"
                         >
-                          Read More
+                          Read blog
+                          <i class="bi bi-arrow-right"></i>
                         </a>
                       }
                     </span>

@@ -1,5 +1,5 @@
 export const environment = {
-  //piBaseUrl: 'https://spaceofthoughts.com',
+  //apiBaseUrl: 'https://spaceofthoughts.com',
 
   // for testing
   apiBaseUrl: 'https://localhost:7000', // testing with https (swagger)
