@@ -53,4 +53,5 @@ sudo update-ca-certificates
 dotnet run &
 
 # Open a new terminal window to run npm install and ng serve
-gnome-terminal -- bash -c "cd ~/SpaceOfThoughts.UI && npm install && ng serve; exec bash"
+# The Angular CLI will ask if you want to activate the autosuggestion functionality type y or n according to your preferance
+gnome-terminal -- bash -c "cd ~/SpaceOfThoughts.UI && npm install && ng serve; exec bash"  
