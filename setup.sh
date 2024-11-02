@@ -3,7 +3,7 @@
 # Download the API Repo
 git clone https://github.com/jfauser1395/SpaceOfThoughts.API.git
 
-# Download and install nodejs
+# Download and install nodejs version 20.x.x
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 
@@ -13,8 +13,6 @@ sudo npm install -g @angular/cli
 # Download and install MySQL Server
 sudo apt install -y mysql-server
 
-sleep 1
-
 # Setup the project's default database
 sudo mysql < SpaceOfThoughts.UI/InstallationScript/mysql_commands.sql
 
@@ -23,8 +21,6 @@ sudo apt install -y dotnet-sdk-8.0
 
 # Download and install EF framework Core
 dotnet tool install --global dotnet-ef
-
-sleep 1
 
 # Update PATH for the EF framework
 echo 'export PATH="$PATH:/home/$(whoami)/.dotnet/tools"' >> ~/.profile
