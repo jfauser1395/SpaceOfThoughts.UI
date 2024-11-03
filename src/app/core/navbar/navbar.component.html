@@ -188,6 +188,7 @@
                 aria-label="logout"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
+                name="Sign out button"
               >
                 Sign out
               </button>
@@ -258,6 +259,7 @@
               [routerLink]="['/login']"
               class="btn btn-link btnIcons mt-1 me-2"
               aria-label="login"
+              name="login button"
             >
               <!-- SVG is the user icon -->
               <svg
@@ -278,7 +280,7 @@
           } @else {
             <div class="d-flex align-items-center">
               <!--  logs the user out -->
-              <button class="btn btn-outline-light btnPrimary ms-2" (click)="onLogout()">
+              <button class="btn btn-outline-light btnPrimary ms-2" (click)="onLogout()" name="sign out button">
                 Sign out
               </button>
             </div>
