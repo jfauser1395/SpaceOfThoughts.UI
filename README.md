@@ -1,8 +1,5 @@
 
-<p align="center">
-  <h3>[:warning: Finish API setup first and return after :warning:](https://github.com/jfauser1395/SpaceOfThoughts.API)</h3>
-</p>
-
+### [:warning: Finish API setup first and return after :warning:](https://github.com/jfauser1395/SpaceOfThoughts.API)
 
 # SpaceOfThoughts.UI
 
