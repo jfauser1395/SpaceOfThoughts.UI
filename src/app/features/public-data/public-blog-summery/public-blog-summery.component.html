@@ -11,7 +11,7 @@
             @if (blog.isVisible) {
               <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-3 d-flex mb-2 p-2">
                 <!-- Blog post card -->
-                <div class="card d-flex cardBackground w-100">
+                <div class="card d-flex cardBackground w-100 cardBackground">
                   <!-- Blog post featured image -->
                   <img
                     [src]="blog.featuredImageUrl"
@@ -25,7 +25,9 @@
                     <div class="d-flex">
                       <!-- Loop through the categories and display each category -->
                       @for (category of blog.categories; track category) {
-                        <span class="badge bg-secondary ms-3 mt-1">
+                        <span
+                          class="badge bg-gradient border border-1 ms-3 mt-1"
+                        >
                           {{ category.name }}
                         </span>
                       }
@@ -54,20 +56,18 @@
                       @if (user === undefined) {
                         <a
                           [routerLink]="['/login']"
-                          class="btn btn btn-outline-dark blogFontTheme btnPrimary active"
+                          class="btn btnPrimary btn-outline-light blogFontThemey"
                           aria-label="Read more link"
                         >
                           Read blog
-                          <i class="bi bi-arrow-right"></i>
                         </a>
                       } @else {
                         <a
                           [routerLink]="['/blog', blog.urlHandle]"
-                          class="btn btn btn-outline-light blogFontTheme btnPrimary active"
+                          class="btn btnPrimary btn-outline-light blogFontTheme"
                           aria-label="Read more link"
                         >
                           Read blog
-                          <i class="bi bi-arrow-right"></i>
                         </a>
                       }
                     </span>

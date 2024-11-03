@@ -7,7 +7,6 @@
 
 /*########################################################################*/
 /*Buttons*/
-
 /*buttons inside input fields*/
 .custom-input-group {
   display: flex;
@@ -94,7 +93,7 @@ input:-webkit-autofill + .inside-btn {
 }
 
 /*########################################################################*/
-/*Fonts*/
+/*Fonts and backgrounds*/
 @font-face {
   font-family: NavFont;
   src: url("../public/assets/fonts/Magiesta.ttf");
@@ -122,6 +121,12 @@ input:-webkit-autofill + .inside-btn {
   font-family: NavFont;
   font-size: 20px;
 }
+
+/* Card background */
+.cardBackground {
+  background: #17191d;
+}
+
 /*########################################################################*/
 /* Custom scrollbar */
 
